@@ -23,4 +23,15 @@ const typeDefs = `
     totalAmount: Float
     status: String
   }
+
+  type Product {
+    _id: ID
+    name: String
+    description: String
+    image: String
+    price: Float
+    quantity: Int
+    category: Category
+    tags: [ Tag ]
+  }
 `
