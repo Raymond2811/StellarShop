@@ -5,4 +5,9 @@ const typeDefs = `
     addedOn: [String]
     quantity: [Int]
   }
+
+  type Category {
+    _id: ID
+    name: String
+  }
 `
