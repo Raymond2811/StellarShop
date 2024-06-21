@@ -34,4 +34,10 @@ const typeDefs = `
     category: Category
     tags: [ Tag ]
   }
+
+  type Tag {
+    _id: ID
+    name: String
+    tagGroup: String
+  }
 `
