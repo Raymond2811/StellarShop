@@ -9,6 +9,8 @@ const cartSchema = new Schema({
       ref: 'Product'
     },
   ],
+  addedOn: [{type: Date, default: Date.now}],
+  quantity: [{type: Number, default: 1}]
 });
 
 const Cart = mongoose.model('Cart', cartSchema);
