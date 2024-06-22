@@ -69,6 +69,11 @@ const typeDefs = `
     quantity: Int
   }
 
+  type UserDeleted {
+    success: Boolean
+    message: String
+  }
+
   type Query {
     user: User
     category: [Category]
@@ -78,6 +83,19 @@ const typeDefs = `
     orders: [Order]
     cart(_id: ID!): Cart
     checkout(products: [ProductInput]): Checkout
+  }
+
+  type Mutation {
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    updateUser(firstName: String, lastName: String, email: String, password: String): User
+    deleteUser(email: String!, password: String!): UserDeleted
+    addOrder(products: [ID]!): Order
+    updateProduct(_id: ID!, quantity: Int, description: String, price: Float): Product
+    login(email: String!, password: String!): Auth
+    logout: String
+    addToCart(product: ID!, quantity: Int): Cart
+    removeFromCart(product: ID!): Cart
+    clearCart: Cart
   }
 `;
 
