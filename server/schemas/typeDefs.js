@@ -50,4 +50,22 @@ const typeDefs = `
     orders: [ Order ]
     cart: [ Cart ]
   }
+
+  type Checkout {
+    session: ID
+  }
+
+  type Auth {
+    token: ID
+    user: User
+  }
+
+  input ProductInput {
+    _id: ID
+    purchaseQuantity: Int
+    name: String
+    image: String
+    price: Float
+    quantity: Int
+  }
 `
