@@ -68,4 +68,17 @@ const typeDefs = `
     price: Float
     quantity: Int
   }
-`
+
+  type Query {
+    user: User
+    category: [Category]
+    product(_id: ID!): Product
+    products(category: ID, name: String, tag: String): [Product]
+    order(_id: ID!): Order
+    orders: [Order]
+    cart(_id: ID!): Cart
+    checkout(products: [ProductInput]): Checkout
+  }
+`;
+
+module.exports = typeDefs;
