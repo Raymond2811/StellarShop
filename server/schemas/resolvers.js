@@ -26,7 +26,10 @@ const resolvers = {
         console.error('Error fetching user:', error);
         throw new Error('Failed to fetch user data');
       }
-    } 
+    }, 
+    categories: async () => {
+      return await Category.find();
+    },
   }
 }
 

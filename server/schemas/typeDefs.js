@@ -76,7 +76,7 @@ const typeDefs = `
 
   type Query {
     user: User
-    category: [Category]
+    categories: [Category]
     product(_id: ID!): Product
     products(category: ID, name: String, tag: String): [Product]
     order(_id: ID!): Order
