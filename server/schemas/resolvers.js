@@ -30,6 +30,15 @@ const resolvers = {
     categories: async () => {
       return await Category.find();
     },
+    category: async (_root, {_id}) => {
+      try {
+        const category = await Category.findById(_id)
+          .populate('products');
+          return category;
+      } catch(error){
+        throw new Error(`Error fetching category: ${error.message}`);
+      }
+    },
   }
 }
 
