@@ -43,6 +43,31 @@ const resolvers = {
         throw new Error(`Error fetching category: ${error.message}`);
       }
     },
+    products: async (parent, { category, name, tag }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
+      }
+
+      if (tag) {
+        params.tags = tag;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name,
+          $options: 'i'
+        };
+      }
+
+      try {
+        const products = await Product.find(params).populate('category').populate('tags');
+        return products;
+      } catch (error) {
+        throw new Error(`Failed to fetch products: ${error.message}`);
+      }
+    },
   }
 }
 
