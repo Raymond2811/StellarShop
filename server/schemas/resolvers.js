@@ -28,7 +28,11 @@ const resolvers = {
       }
     }, 
     categories: async () => {
-      return await Category.find();
+      try{
+        return await Category.find();
+      } catch(error){
+        throw new Error(`Error fetching categories: ${error.message}`)
+      }
     },
     category: async (_root, {_id}) => {
       try {
