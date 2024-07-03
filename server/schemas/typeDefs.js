@@ -81,7 +81,6 @@ const typeDefs = `
     category(_id: ID!): Category
     product(_id: ID!): Product
     products(category: ID, name: String, tag: String): [Product]
-    order(_id: ID!): Order
     orders: [Order]
     cart(_id: ID!): Cart
     checkout(products: [ProductInput]): Checkout

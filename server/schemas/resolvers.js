@@ -83,6 +83,26 @@ const resolvers = {
         throw new Error(`Failed to fetch products: ${error.message}`);
       }
     },
+    orders: async (parent, args, context) => {
+      if(!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      try {
+        const userOrders = await User.findById(context.user._id)
+        .populate({
+          path:'orders.products',
+        });
+
+        if(!userOrders){
+          throw new Error('User not found');
+        }
+
+        return userOrders.orders
+      } catch(error){
+        throw new Error(`An error occurred while fetching orders: ${error.message}`);
+      }
+    },
   }
 }
 
