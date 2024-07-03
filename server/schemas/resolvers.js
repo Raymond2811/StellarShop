@@ -103,6 +103,23 @@ const resolvers = {
         throw new Error(`An error occurred while fetching orders: ${error.message}`);
       }
     },
+    cart: async (parent, args, context) => {
+      if(!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      try {
+        const user = await User.findById(context.user._id)
+          .populate('cart');
+        
+        if (!user) {
+          throw new Error('User not found');
+        }
+        return user.cart;
+      } catch (error) {
+        throw new Error(`Failed to fetch cart: ${error.message}`);
+      }
+    },
   }
 }
 
