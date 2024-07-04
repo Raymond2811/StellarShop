@@ -157,6 +157,16 @@ const resolvers = {
         throw new Error(`Failed to create checkout session: ${error.message}`);
       }
     },
+    addUser: async (parent, args) => {
+      try {
+        const user = await User.create(args);
+        const token = signToken(user);
+  
+        return {token, user};
+      } catch (error) {
+        throw new Error(`Failed to create user: ${error.message}`);
+      }
+    },
   }
 }
 
