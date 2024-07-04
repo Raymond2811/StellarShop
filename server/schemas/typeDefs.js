@@ -83,10 +83,10 @@ const typeDefs = `
     products(category: ID, name: String, tag: String): [Product]
     orders: [Order]
     cart: Cart
-    checkout(products: [ProductInput]): Checkout
   }
 
   type Mutation {
+    checkout(products: [ProductInput]): Checkout
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     deleteUser(email: String!, password: String!): UserDeleted

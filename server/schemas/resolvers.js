@@ -1,6 +1,6 @@
 const { Cart, Category, Order, Product, Tag, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-const stripe = require('stripe')('');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const resolvers = {
   Query: {
@@ -118,6 +118,43 @@ const resolvers = {
         return user.cart;
       } catch (error) {
         throw new Error(`Failed to fetch cart: ${error.message}`);
+      }
+    },
+  },
+  Mutation: {
+    checkout: async (parent, { products }, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in!');
+      }
+      const url = new URL(context.headers.referer).origin;
+
+      try {
+        await Order.create({ products: products.map(({ _id }) => _id) });
+
+        const lineItems = products.map(product => ({
+          price_data:{
+            currency: 'usd',
+            product_data: {
+              name: product.name,
+              description: product.description,
+              images: [product.image],
+            },
+            unit_amount: Math.floor(product.price * 100),
+          },
+          quantity: product.purchaseQuantity,
+        }));
+      
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: lineItems,
+          mode: 'payment',
+          success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${url}/`,
+        });
+
+        return { session: session.id };
+      } catch (error) {
+        throw new Error(`Failed to create checkout session: ${error.message}`);
       }
     },
   }
