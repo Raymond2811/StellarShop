@@ -238,6 +238,27 @@ const resolvers = {
         throw new Error(`Failed to update product: ${error.message}`);
       }
     },
+    login: async (parent, { email, password }) => {
+      try {
+        const user = await User.findOne({email});
+
+        if (!user){
+          throw new AuthenticationError('No user found with this email address');
+        }
+
+        const correctPw = await user.isCorrectPassword(password);
+
+        if(!correctPw){
+          throw new AuthenticationError('Incorrect password');
+        }
+
+        const token = signToken(user);
+
+        return { token, user};
+      } catch (error) {
+        throw new Error(`Login failed: ${error.message}`);
+      }
+    },
   }
 }
 
