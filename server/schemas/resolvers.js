@@ -183,6 +183,31 @@ const resolvers = {
        throw new Error(`Failed to create user: ${error.message}`);
       }
     },
+    deleteUser: async (parent, {email, password}, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      try {
+        const user = await User.findById(context.user._id);
+
+        const isPasswordCorrect = await user.isCorrectPassword(password);
+        if (!isPasswordCorrect || user.email !== email){
+          throw new Error('Incorrect email or password');
+        }
+
+        await User.findByIdAndDelete(context.user._id);
+        return {
+          success: true,
+          message: 'User deleted successfully',
+        };
+      } catch (error) {
+        return {
+          success: false,
+          message: `Failed to delete user: ${error.message}`,
+        };
+      }
+    },
   }
 }
 
