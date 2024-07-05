@@ -225,6 +225,19 @@ const resolvers = {
         throw new Error(`Failed to create order: ${error.message}`);
       }
     },
+    updateProduct: async (parent, { _id, quantity }) => {
+      try {
+        const decrement = Math.abs(quantity) * -1;
+
+        return await Product.findByIdAndUpdate(
+          _id,
+          { $inc: {quantity: decrement }},
+          { new: true}
+        ); 
+      } catch (error) {
+        throw new Error(`Failed to update product: ${error.message}`);
+      }
+    },
   }
 }
 
