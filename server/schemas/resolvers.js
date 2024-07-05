@@ -167,6 +167,22 @@ const resolvers = {
         throw new Error(`Failed to create user: ${error.message}`);
       }
     },
+    updateUser: async (parent, args, context) => {
+      if(!context.user){
+        throw new AuthenticationError('');
+      }
+
+      try {
+        const user = await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+          runValidators: true,
+        });
+
+        return user;
+      } catch (error) {
+       throw new Error(`Failed to create user: ${error.message}`);
+      }
+    },
   }
 }
 
