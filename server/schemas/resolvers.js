@@ -259,6 +259,18 @@ const resolvers = {
         throw new Error(`Login failed: ${error.message}`);
       }
     },
+    logout: async (parent, args, context) => {
+      try {
+        if(context.user){
+          context.user = null;
+          return 'you have been logged out';
+        }
+
+        throw new AuthenticationError('No user is currently logged in');
+      } catch (error) {
+        throw new Error(`Logout failed: ${error.message}`);
+      }
+    },
   }
 }
 
