@@ -208,6 +208,23 @@ const resolvers = {
         };
       }
     },
+    addOrder: async (parent, { products }, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      try {
+        const order = await Order.create({ products });
+        
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: {orders: order._id},
+        });
+
+        return order;
+      } catch (error) {
+        throw new Error(`Failed to create order: ${error.message}`);
+      }
+    },
   }
 }
 
