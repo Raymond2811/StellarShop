@@ -316,6 +316,23 @@ const resolvers = {
         throw new Error(`Failed to remove product from cart: ${error.message}`);
       }
     },
+    clearCart: async (parent, args, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      try {
+        const user = await User.findByIdAndUpdate (
+          context.user._id,
+          { $set: {cart: [] }},
+          { new: true }
+        ).populate('cart');
+
+        return user.cart;
+      } catch (error) {
+        throw new Error(`Failed to clear cart: ${error.message}`);
+      }
+    },
   }
 }
 
