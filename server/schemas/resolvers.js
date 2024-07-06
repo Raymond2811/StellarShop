@@ -271,6 +271,34 @@ const resolvers = {
         throw new Error(`Logout failed: ${error.message}`);
       }
     },
+    addToCart: async (parent, { _id, quantity}, context) => {
+      if(!context.user){
+        throw new AuthenticationError('You need to be logged in!');
+      }
+
+      try {
+        const productToAdd = await Product.findById(_id);
+
+        if(!productToAdd){
+          throw new Error('Product not found');
+        }
+
+        const user = await User.findById(context.user._id);
+        const cartItemIndex = user.cart.findIndex(item => item.product.equals(_id));
+
+        if (cartItemIndex > -1){
+          user.cart[cartItemIndex].quantity += quantity ;
+        }else{
+          user.cart.push ({ products: productToAdd, quantity});
+        }
+
+        await user.save();
+        await user.populate('cart.product').execPopulate();
+        return user.cart;
+      } catch (error) {
+        throw new Error(`Failed to add product to cart: ${error.message}`);
+      }
+    },
   }
 }
 
