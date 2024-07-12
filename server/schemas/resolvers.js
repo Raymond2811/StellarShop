@@ -1,12 +1,13 @@
 const { Cart, Category, Order, Product, Tag, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const bcrypt = require('bcrypt');
 
 const resolvers = {
   Query: {
-    user: async (_root, args, context) => {
+    user: async (parent, args, context) => {
       if(!context.user) {
-        throw new AuthenticationError('You need to be logged in!');
+        throw AuthenticationError;
       }
 
       try {
@@ -34,7 +35,7 @@ const resolvers = {
         throw new Error(`Error fetching categories: ${error.message}`)
       }
     },
-    category: async (_root, {_id}) => {
+    category: async (parent, {_id}) => {
       try {
         const category = await Category.findById(_id)
           .populate('products');
@@ -169,10 +170,15 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if(!context.user){
-        throw new AuthenticationError('');
+        throw AuthenticationError;
       }
 
       try {
+        if (args.password) {
+          const saltRounds = 10;
+          args.password = await bcrypt.hash(args.password, saltRounds);
+        }
+    
         const user = await User.findByIdAndUpdate(context.user._id, args, {
           new: true,
           runValidators: true,
@@ -180,12 +186,12 @@ const resolvers = {
 
         return user;
       } catch (error) {
-       throw new Error(`Failed to create user: ${error.message}`);
+       throw new Error(`Failed to update user: ${error.message}`);
       }
     },
     deleteUser: async (parent, {email, password}, context) => {
       if(!context.user){
-        throw new AuthenticationError('You need to be logged in!');
+        throw AuthenticationError;
       }
 
       try {
