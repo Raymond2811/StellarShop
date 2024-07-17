@@ -1,6 +1,7 @@
-const { Product, Category } = require('../models');
+const { User, Product, Category } = require('../models');
 const products = require('./seedData');
 const cleanDB = require('./cleanDB');
+const db = require('./connection');
 
 const seedData = async () => {
   await cleanDB('Category', 'categories');
@@ -33,9 +34,9 @@ const seedData = async () => {
     console.log('Database seeded successfully');
   } catch(error){
     console.error('Error seeding database:', error);
-  } 
+  } finally{
+    process.exit();
+  }
+}; 
 
-  process.exit();
-};
-
-seedData();
+db.once('open', seedData);

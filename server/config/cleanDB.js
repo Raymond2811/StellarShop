@@ -10,6 +10,7 @@ module.exports = async (modelName, collectionName) => {
 
       if (modelExists.length) {
         await db.dropCollection(collectionName);
+        console.log(`Successfully dropped collection: ${collectionName}`);
       }
     } else {
       console.error(`Model "${modelName}" is not properly defined or is missing necessary properties.`);
