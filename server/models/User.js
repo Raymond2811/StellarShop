@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
-const Order = require('./Order');
+// const Order = require('./Order');
+const Cart = require('./Cart')
 
 const userSchema = new Schema({
   firstName: {
@@ -32,12 +33,7 @@ const userSchema = new Schema({
     ref: 'Order'
     },
   ],
-  cart: [
-    {
-      type: Schema.Types.ObjectId,
-      ref:'Cart'
-    }
-  ],
+  cart: [Cart.schema],
 });
 
 userSchema.pre('save', async function(next){

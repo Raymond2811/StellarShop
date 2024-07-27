@@ -2,6 +2,7 @@ const { Cart, Category, Order, Product, Tag, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
@@ -46,6 +47,7 @@ const resolvers = {
     },
     product: async (parent, { _id }) => {
       try {
+        console.log("product data:",_id)
         const product = await Product.findById(_id)
           .populate('category')
           .populate('tags');
@@ -277,29 +279,28 @@ const resolvers = {
         throw new Error(`Logout failed: ${error.message}`);
       }
     },
-    addToCart: async (parent, { _id, quantity}, context) => {
+    addToCart: async (parent, { productId , quantity}, context) => {
       if(!context.user){
         throw new AuthenticationError('You need to be logged in!');
       }
 
       try {
-        const productToAdd = await Product.findById(_id);
+        const productToAdd = await Product.findById(productId);
 
         if(!productToAdd){
           throw new Error('Product not found');
         }
 
         const user = await User.findById(context.user._id);
-        const cartItemIndex = user.cart.findIndex(item => item.product.equals(_id));
+        const cartItemIndex = user.cart.findIndex(item => item.product.equals(productId));
 
         if (cartItemIndex > -1){
-          user.cart[cartItemIndex].quantity += quantity ;
+          user.cart[cartItemIndex].quantity[0] += quantity ; 
         }else{
-          user.cart.push ({ products: productToAdd, quantity});
+          user.cart.push ({ product: productId, quantity:[ quantity]});
         }
-
         await user.save();
-        await user.populate('cart.product').execPopulate();
+        await user.populate('cart.product');
         return user.cart;
       } catch (error) {
         throw new Error(`Failed to add product to cart: ${error.message}`);
