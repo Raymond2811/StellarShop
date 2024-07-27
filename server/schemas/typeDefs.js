@@ -81,7 +81,7 @@ const typeDefs = `
     product(_id: ID!): Product
     products(category: ID, name: String, tag: String): [Product]
     orders: [Order]
-    cart: Cart
+    cart: [Cart]
   }
 
   type Mutation {
@@ -94,8 +94,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     logout: String
     addToCart(productId: ID!, quantity: Int!): [Cart]
-    removeFromCart(productId: ID!): Cart
-    clearCart: Cart
+    removeFromCart(productId: ID!): [Cart]
+    clearCart: [Cart]
   }
 `;
 

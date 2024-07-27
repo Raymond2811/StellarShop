@@ -113,7 +113,7 @@ const resolvers = {
 
       try {
         const user = await User.findById(context.user._id)
-          .populate('cart');
+          .populate('cart.product');
         
         if (!user) {
           throw new Error('User not found');
