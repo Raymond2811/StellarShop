@@ -306,18 +306,32 @@ const resolvers = {
         throw new Error(`Failed to add product to cart: ${error.message}`);
       }
     },
-    removeFromCart: async (parent, { _id } , context ) =>{
+    removeFromCart: async (parent, { productId } , context ) =>{
       if(!context.user){
         throw new AuthenticationError('You need to be logged in!');
       }
 
       try {
+
+        // const user = await User.findById(context.user._id);
+    
+        // const updatedCart = user.cart.filter(item => !item.product.equals(productId));
+      
+        // user.cart = updatedCart;
+        // await user.save();
+
+        // const userBeforeUpdate = await User.findById(context.user._id).populate('cart.product');
+        // console.log('User before update:', JSON.stringify(userBeforeUpdate.cart, null, 2));
+
         const user = await User.findByIdAndUpdate(
           context.user._id,
-          { $pull: {cart: { _id}}},
+          { $pull: {cart:  {product: productId} }},
           { new: true}
-        ).populate('cart');
+        ).populate('cart.product');
+        
+        // console.log('User after update:', JSON.stringify(user.cart, null, 2));
 
+        console.log('successfully removed from cart:', user.cart);
         return user.cart;
       } catch (error) {
         throw new Error(`Failed to remove product from cart: ${error.message}`);
