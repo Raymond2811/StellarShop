@@ -312,24 +312,11 @@ const resolvers = {
       }
 
       try {
-
-        // const user = await User.findById(context.user._id);
-    
-        // const updatedCart = user.cart.filter(item => !item.product.equals(productId));
-      
-        // user.cart = updatedCart;
-        // await user.save();
-
-        // const userBeforeUpdate = await User.findById(context.user._id).populate('cart.product');
-        // console.log('User before update:', JSON.stringify(userBeforeUpdate.cart, null, 2));
-
         const user = await User.findByIdAndUpdate(
           context.user._id,
           { $pull: {cart:  {product: productId} }},
           { new: true}
         ).populate('cart.product');
-        
-        // console.log('User after update:', JSON.stringify(user.cart, null, 2));
 
         console.log('successfully removed from cart:', user.cart);
         return user.cart;
