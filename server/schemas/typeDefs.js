@@ -13,7 +13,7 @@ const typeDefs = `
 
   type ProductOrder {
     product: Product
-    quantity: Int
+    purchaseQuantity: Int
   }
 
   type Order {
@@ -89,7 +89,7 @@ const typeDefs = `
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     deleteUser(email: String!, password: String!): UserDeleted
-    addOrder(products: [ID]!): Order
+    addOrder(products: [ProductInput]!): Order
     updateProduct(_id: ID!, quantity: Int, description: String, price: Float): Product
     login(email: String!, password: String!): Auth
     logout: String

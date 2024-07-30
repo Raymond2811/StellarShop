@@ -132,7 +132,7 @@ const resolvers = {
       const url = new URL(context.headers.referer).origin;
 
       try {
-        await Order.create({ products: products.map(({ _id }) => _id) });
+        // await Order.create({ products: products.map(({ _id }) => _id) });
 
         const lineItems = products.map(product => ({
           price_data:{
@@ -222,13 +222,26 @@ const resolvers = {
       }
 
       try {
-        const order = await Order.create({ products });
+        const orderProducts = products.map(({_id, purchaseQuantity}) => ({
+          product: _id,
+          purchaseQuantity
+        }))
+
+        const totalAmount = products.reduce((sum, {price, purchaseQuantity}) => 
+        sum + (price * purchaseQuantity), 0);
+
+        const order = await Order.create({ 
+          products: orderProducts,
+          totalAmount,
+          status:'Pending',
+         });
         
         await User.findByIdAndUpdate(context.user._id, {
           $push: {orders: order._id},
         });
+        const populatedOrder = await Order.findById(order._id).populate('products.product');
 
-        return order;
+        return populatedOrder;
       } catch (error) {
         throw new Error(`Failed to create order: ${error.message}`);
       }

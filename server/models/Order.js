@@ -14,7 +14,7 @@ const orderSchema = new Schema({
         ref: 'Product',
         required: true
       },
-      quantity:{
+      purchaseQuantity:{ 
         type: Number,
         required: true,
         min: 1,
