@@ -94,7 +94,11 @@ const resolvers = {
       try {
         const userOrders = await User.findById(context.user._id)
         .populate({
-          path:'orders.products',
+          path: 'orders',
+          populate: {
+            path: 'products.product',
+            model: 'Product'
+          }
         });
 
         if(!userOrders){
