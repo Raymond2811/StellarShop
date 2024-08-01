@@ -91,8 +91,6 @@ mutation AddToCart($productId: ID!, $quantity: Int!) {
       _id
       name
       price
-      quantity
-      description
       image
     }
     quantity
@@ -106,11 +104,9 @@ mutation RemoveFromCart($productId: ID!) {
     _id
     product {
       _id
-      description
       image
       name
       price
-      quantity
     }
     quantity
   }

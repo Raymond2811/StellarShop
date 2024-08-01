@@ -20,3 +20,18 @@ export const ORDERS = gql`
     }
   }
 `;
+
+export const CART = gql`
+query Cart {
+  cart {
+    _id
+    product {
+      _id
+      name
+      price
+      image
+    }
+    quantity
+  }
+}
+`;
