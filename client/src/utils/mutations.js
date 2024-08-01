@@ -108,3 +108,14 @@ mutation RemoveFromCart($productId: ID!) {
   }
 }
 `;
+
+export const CLEAR_CART = gql`
+mutation ClearCart {
+  clearCart {
+    _id
+    product {
+      _id
+    }
+  }
+}
+`;
