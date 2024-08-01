@@ -42,3 +42,18 @@ mutation UpdateUser(
   }
 }
 `;
+
+export const DELETE_USER = gql`
+mutation DeleteUser(
+  $email: String!, 
+  $password: String!
+) {
+  deleteUser(
+    email: $email, 
+    password: $password
+  ) {
+    message
+    success
+  }
+}
+`;
