@@ -91,3 +91,20 @@ mutation AddToCart($productId: ID!, $quantity: Int!) {
   }
 }
 `;
+
+export const REMOVE_FROM_CART = gql`
+mutation RemoveFromCart($productId: ID!) {
+  removeFromCart(productId: $productId) {
+    _id
+    product {
+      _id
+      description
+      image
+      name
+      price
+      quantity
+    }
+    quantity
+  }
+}
+`;
