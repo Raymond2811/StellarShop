@@ -48,3 +48,12 @@ query Product($id: ID!) {
   }
 }
 `;
+
+export const QUERY_CATEGORIES = gql`
+query Categories {
+  categories {
+    name
+    _id
+  }
+}
+`;
