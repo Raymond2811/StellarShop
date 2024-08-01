@@ -128,3 +128,24 @@ mutation UpdateProduct($id: ID!, $quantity: Int) {
   }
 }
 `;
+
+export const ADD_ORDER = gql`
+mutation AddOrder($products: [ProductInput]!) {
+  addOrder(products: $products) {
+    _id
+    products {
+      product {
+        _id
+        image
+        name
+        price
+        description
+      }
+      purchaseQuantity
+    }
+    purchaseDate
+    status
+    totalAmount
+  }
+}
+`;
