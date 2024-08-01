@@ -187,7 +187,6 @@ const resolvers = {
     
         const user = await User.findByIdAndUpdate(context.user._id, args, {
           new: true,
-          runValidators: true,
         });
 
         return user;
