@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client';
 
+export const CHECKOUT = gql`
+mutation Checkout($products: [ProductInput]) {
+  checkout(products: $products) {
+    session
+  }
+}
+`;
+
 export const ADD_USER = gql`
 mutation AddUser(
   $firstName: String!, 
