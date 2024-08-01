@@ -74,3 +74,20 @@ mutation Login($email: String!, $password: String!) {
   }
 }
 `;
+
+export const ADD_TO_CART = gql`
+mutation AddToCart($productId: ID!, $quantity: Int!) {
+  addToCart(productId: $productId, quantity: $quantity) {
+    _id
+    product {
+      _id
+      name
+      price
+      quantity
+      description
+      image
+    }
+    quantity
+  }
+}
+`;
