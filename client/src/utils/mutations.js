@@ -57,3 +57,9 @@ mutation DeleteUser(
   }
 }
 `;
+
+export const LOGOUT = gql`
+mutation Mutation {
+  logout
+}
+`;
