@@ -57,3 +57,19 @@ query Categories {
   }
 }
 `;
+
+export const QUERY_CATEGORY = gql`
+query Category($id: ID!) {
+  category(_id: $id) {
+    _id
+    name
+    products {
+      _id
+      image
+      name
+      price
+      quantity
+    }
+  }
+}
+`;
