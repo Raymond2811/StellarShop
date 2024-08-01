@@ -119,3 +119,12 @@ mutation ClearCart {
   }
 }
 `;
+
+export const UPDATE_PRODUCT =gql`
+mutation UpdateProduct($id: ID!, $quantity: Int) {
+  updateProduct(_id: $id, quantity: $quantity) {
+    _id
+    quantity
+  }
+}
+`;
