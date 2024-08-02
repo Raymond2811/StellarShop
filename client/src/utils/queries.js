@@ -73,3 +73,14 @@ query Category($id: ID!) {
   }
 }
 `;
+
+export const QUERY_USER = gql`
+query User {
+  user {
+    _id
+    email
+    firstName
+    lastName
+  }
+}
+`;
