@@ -84,3 +84,16 @@ query User {
   }
 }
 `;
+
+export const QUERY_PRODUCTS = gql`
+query Products($category: ID, $name: String, $tag: String) {
+  products(category: $category, name: $name, tag: $tag) {
+    _id
+    name
+    quantity
+    description
+    price
+    image
+  }
+}
+`;
