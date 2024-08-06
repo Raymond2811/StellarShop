@@ -155,7 +155,7 @@ const resolvers = {
           payment_method_types: ['card'],
           line_items: lineItems,
           mode: 'payment',
-          success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+          success_url: `${url}/success`,
           cancel_url: `${url}/`,
         });
 
