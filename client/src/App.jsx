@@ -7,6 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import Nav from './components/Nav';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
@@ -45,6 +46,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
+        <Nav/>
         <Outlet/>
       </Provider>
     </ApolloProvider>

@@ -3,6 +3,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import App from './App';
+import NoMatch from './pages/NoMatch';
+import Home from './pages/Home';
+import Account from './pages/Account';
+import Profile from './pages/Profile';
+import OrderHistory from './pages/OrderHistory';
+import Computers from './pages/Computers';
+import VideoGames from './pages/VideoGames';
+import CellPhones from './pages/CellPhones';
+import Cameras from './pages/Cameras';
+import Detail from './pages/Detail';
+import Success from './pages/Success';
 
 const router = createBrowserRouter([
   {
