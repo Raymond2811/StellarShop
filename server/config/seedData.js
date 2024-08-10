@@ -5,7 +5,7 @@ const products = [
     image: '/assets/images/PlatStation 5.jpeg',
     price: 1500.00,
     quantity: 50,
-    category: 'Computers & Tablets',
+    category: 'Computers',
   },
   {
     name: 'Apple - MacBook Air 13.6" Laptop - 256GB SSD - Midnight',
@@ -13,7 +13,7 @@ const products = [
     image: '/assets/images/PlatStation 5.jpeg',
     price: 499.00,
     quantity: 50,
-    category: 'Computers & Tablets',
+    category: 'Computers',
   },
   {
     name: 'PlayStation 5 Slim Console Digital Edition',
@@ -53,7 +53,7 @@ const products = [
     image: '/assets/images/PlatStation 5.jpeg',
     price: 2576.00,
     quantity: 25,
-    category: 'Cameras & Drones',
+    category: 'Cameras',
   },
   {
     name: 'Canon - EOS R6 Mark II Mirrorless Camera (Body Only) - Black',
@@ -61,7 +61,7 @@ const products = [
     image: '/assets/images/PlatStation 5.jpeg',
     price: 1025.93,
     quantity: 30,
-    category: 'Cameras & Drones',
+    category: 'Cameras',
   },
 ]
 
