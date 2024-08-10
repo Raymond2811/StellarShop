@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         element: <Profile/>
       },
       {
-        path: '/orderHistory',
+        path: '/orderhistory',
         element: <OrderHistory/>
       },
       {
@@ -42,11 +42,11 @@ const router = createBrowserRouter([
         element: <Computers/>
       },
       {
-        path: '/videoGames',
+        path: '/videogames',
         element: <VideoGames/>
       },
       {
-        path: '/cellPhones',
+        path: '/cellphones',
         element: <CellPhones/>
       },
       {
