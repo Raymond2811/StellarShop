@@ -1,6 +1,11 @@
+import ProductList from "../components/ProductList";
 
 export default function Cameras() {
   return(
-    <h1> Cameras</h1>
+    <div>
+      <h1>Cameras</h1>
+
+      <ProductList/>
+    </div>
   )
 }

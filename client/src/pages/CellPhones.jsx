@@ -1,6 +1,11 @@
+import ProductList from "../components/ProductList";
 
 export default function CellPhones() {
   return(
-    <h1>CellPhones</h1>
+    <div>
+      <h1>Cell Phones</h1>
+
+      <ProductList/>
+    </div>
   )
 }

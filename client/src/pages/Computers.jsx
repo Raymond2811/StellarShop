@@ -1,5 +1,11 @@
+import ProductList from "../components/ProductList";
+
 export default function Computers() {
   return(
-    <h1>Computers</h1>
+    <div>
+      <h1>Computers</h1>
+
+      <ProductList/>
+    </div>
   )
 }
