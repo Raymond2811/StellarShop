@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CATEGORY } from "../../utils/queries";
 import { loadProductsByCategory } from "../../utils/slices/productSlice";
+import ProductItem from "../ProductItem";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -29,11 +30,7 @@ export default function ProductList() {
   return(
     <div>
       {data?.category?.products.map((product)=> (
-        <div key={product._id}>
-          <h3>{product.name}</h3>
-          <p>Price: {product.price}</p>
-          <img src={product.image} alt={product.name}/>
-        </div>
+        <ProductItem key={product._id} product={product}/>
       ))}
     </div>
   )
