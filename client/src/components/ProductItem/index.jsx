@@ -11,21 +11,18 @@ export default function ProductItem({ product }){
   const [addToCartMutation] = useMutation(ADD_TO_CART);
 
   const handleAddToCart = async() => {
-    const existingItem = cartItems.find((item) => item.productId === product._id);
+    const existingItem = cartItems.find((item) => item._id === product._id);
 
     if(!Auth.loggedIn()){
       if(existingItem){
         dispatch(updateCartQuantity({
           ...existingItem,
-          quantity: existingItem.quantity + 1
+          purchaseQuantity: existingItem.purchaseQuantity + 1
         }));
       }else{
         dispatch(addToCart({
-          productId: product._id,
-          name: product.name,
-          quantity: 1,
-          price: product.price,
-          image: product.image,
+          ...product,
+          purchaseQuantity: 1,
         }));
       }
       return;
@@ -35,29 +32,24 @@ export default function ProductItem({ product }){
       await addToCartMutation({
         variables:{
           productId: product._id,
-          quantity: 1,
+          purchaseQuantity: 1,
         },
       });
-
 
       if(existingItem){
         dispatch(updateCartQuantity({
           ...existingItem,
-          quantity: existingItem.quantity + 1
+          purchaseQuantity: existingItem.purchaseQuantity + 1
         }));
       } else{
         dispatch(addToCart({
-          productId: product._id,
-          name: product.name,
-          quantity: 1,
-          price: product.price,
-          image: product.image,
+          ...product,
+          purchaseQuantity: 1,
         }));
       }
     } catch (error) {
      console.error("Error adding to cart:",error.message);
     }
-    
   };
 
   return (

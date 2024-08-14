@@ -31,7 +31,7 @@ query Cart {
       price
       image
     }
-    quantity
+    purchaseQuantity
   }
 }
 `;
@@ -65,6 +65,7 @@ query Category($id: ID!) {
     name
     products {
       _id
+      description
       image
       name
       price

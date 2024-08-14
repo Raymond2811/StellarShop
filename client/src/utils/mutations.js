@@ -84,16 +84,18 @@ mutation Login($email: String!, $password: String!) {
 `;
 
 export const ADD_TO_CART = gql`
-mutation AddToCart($productId: ID!, $quantity: Int!) {
-  addToCart(productId: $productId, quantity: $quantity) {
+mutation AddToCart($productId: ID!, $purchaseQuantity: Int!) {
+  addToCart(productId: $productId, purchaseQuantity: $purchaseQuantity) {
     _id
     product {
       _id
       name
+      description
       price
+      quantity
       image
     }
-    quantity
+    purchaseQuantity
   }
 }
 `;
@@ -104,11 +106,8 @@ mutation RemoveFromCart($productId: ID!) {
     _id
     product {
       _id
-      image
-      name
-      price
     }
-    quantity
+    purchaseQuantity
   }
 }
 `;

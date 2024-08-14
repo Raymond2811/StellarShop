@@ -295,7 +295,7 @@ const resolvers = {
         throw new Error(`Logout failed: ${error.message}`);
       }
     },
-    addToCart: async (parent, { productId , quantity}, context) => {
+    addToCart: async (parent, { productId , purchaseQuantity}, context) => {
       if(!context.user){
         throw new AuthenticationError('You need to be logged in!');
       }
@@ -311,9 +311,9 @@ const resolvers = {
         const cartItemIndex = user.cart.findIndex(item => item.product.equals(productId));
 
         if (cartItemIndex > -1){
-          user.cart[cartItemIndex].quantity[0] += quantity ; 
+          user.cart[cartItemIndex].purchaseQuantity[0] += purchaseQuantity ; 
         }else{
-          user.cart.push ({ product: productId, quantity:[ quantity]});
+          user.cart.push ({ product: productId, purchaseQuantity:[ purchaseQuantity]});
         }
         await user.save();
         await user.populate('cart.product');

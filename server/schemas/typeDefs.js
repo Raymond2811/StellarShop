@@ -2,7 +2,7 @@ const typeDefs = `
   type Cart {
     _id: ID
     product: Product
-    quantity: [Int]
+    purchaseQuantity: [Int]
   }
 
   type Category {
@@ -93,7 +93,7 @@ const typeDefs = `
     updateProduct(_id: ID!, quantity: Int, description: String, price: Float): Product
     login(email: String!, password: String!): Auth
     logout: String
-    addToCart(productId: ID!, quantity: Int!): [Cart]
+    addToCart(productId: ID!, purchaseQuantity: Int!): [Cart]
     removeFromCart(productId: ID!): [Cart]
     clearCart: [Cart]
   }
