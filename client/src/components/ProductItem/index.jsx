@@ -59,7 +59,11 @@ export default function ProductItem({ product }){
         <h3>{product.name}</h3>
       </Link>
       <p>${product.price}</p>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      {product.quantity > 0 ? (
+        <button onClick={handleAddToCart}> Add to Cart </button> 
+        ) : (
+        <p>Out of stock</p>
+      )}
     </div>
   );
 }
