@@ -41,7 +41,7 @@ const client = new ApolloClient({
 const persistConfig = {
   key: 'root',
   storage, // This tells Redux Persist to use localStorage (or another storage engine)
-  whitelist: ['cart'] // Only persist the cart slice
+  whitelist: ['cart'], // Only persist the cart slice
 };
 
 const rootReducer = combineReducers({

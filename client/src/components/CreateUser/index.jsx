@@ -28,6 +28,7 @@ export default function CreateUser() {
       variables: {...formData},
     });
 
+    Auth.login(token);
     await Promise.all(cartItems.map(item =>
       addToCartMutation({
         variables: {
@@ -37,7 +38,6 @@ export default function CreateUser() {
       })
     ));
     
-    Auth.login(token);
     setFormData({
       firstName: '',
       lastName: '',
