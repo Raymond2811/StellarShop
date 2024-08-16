@@ -29,14 +29,15 @@ export default function CreateUser() {
     });
 
     Auth.login(token);
-    await Promise.all(cartItems.map(item =>
+    
+    await Promise.all(cartItems.map((item) =>{
       addToCartMutation({
         variables: {
           productId: item._id,
           purchaseQuantity: item.purchaseQuantity,
         },
       })
-    ));
+    }));
     
     setFormData({
       firstName: '',
