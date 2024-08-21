@@ -3,10 +3,12 @@ import Auth from "../../utils/auth";
 import { ADD_USER, ADD_TO_CART } from "../../utils/mutations";
 import { useSelector } from "react-redux";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateUser() {
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  const navigate = useNavigate();
   const [addUser] = useMutation(ADD_USER);
   const [addToCartMutation] = useMutation(ADD_TO_CART);
   const [formData, setFormData] = useState({
@@ -38,6 +40,8 @@ export default function CreateUser() {
         },
       })
     }));
+
+    navigate('/profile');
     
     setFormData({
       firstName: '',
