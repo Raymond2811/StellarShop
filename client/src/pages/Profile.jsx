@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
-import { UPDATE_USER, DELETE_USER } from '../utils/mutations';
+import { UPDATE_USER, DELETE_USER, CLEAR_CART } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { login, logout } from '../utils/slices/userSlice';
 import { clearCart } from '../utils/slices/cartSlice';
@@ -14,6 +14,7 @@ export default function Profile() {
   const { loading, data, error } = useQuery(QUERY_USER);
   const [updateUser] = useMutation(UPDATE_USER);
   const [deleteUser] = useMutation(DELETE_USER);
+  const [clearCartMutatiion] = useMutation(CLEAR_CART);
 
   const [updateFormData, setUpdateFormData] = useState({
     firstName: '',
@@ -86,10 +87,15 @@ export default function Profile() {
     }
   }
 
-  const handleLogout = () => {
-    dispatch(clearCart());
-    dispatch(logout());
-    Auth.logout();
+  const handleLogout =  async () => {
+    try {
+      await clearCartMutatiion();
+      dispatch(clearCart());
+      dispatch(logout());
+      Auth.logout();
+    } catch(error){
+      console.log('Error logging out:', error.message);
+    }
   };
 
   const handleViwOrderHistory = () => {

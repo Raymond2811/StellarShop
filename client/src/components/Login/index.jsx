@@ -1,14 +1,19 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN, ADD_TO_CART } from '../../utils/mutations';
+import { useMutation, useLazyQuery } from '@apollo/client';
+import { LOGIN, ADD_TO_CART, CLEAR_CART } from '../../utils/mutations';
+import { QUERY_CART } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  const navigate = useNavigate();
   const [login] = useMutation(LOGIN);
   const [addToCartMutation] = useMutation(ADD_TO_CART);
+  const [clearCartMutatiion] = useMutation(CLEAR_CART);
+  const [cartData] = useLazyQuery(QUERY_CART);
   const [formData, setFormData] = useState({
     email:'',
     password: '',
@@ -30,6 +35,12 @@ export default function Login(){
     const { token } = data.login;
 
     Auth.login(token);
+
+    const { data: fetchCartData } = await cartData();
+
+    if(fetchCartData && fetchCartData.cart && fetchCartData.cart.length > 0){
+      await clearCartMutatiion();
+    }
     
     await Promise.all(cartItems.map((item) => {
       return addToCartMutation({
@@ -39,7 +50,9 @@ export default function Login(){
         },
       })
     }));
-        
+    
+    navigate('/profile');
+
     setFormData({
       email: '',
       password: '',
