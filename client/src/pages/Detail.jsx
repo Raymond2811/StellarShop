@@ -60,7 +60,7 @@ export default function Detail() {
       if(existingItem) {
         dispatch(updateCartQuantity({
           ...existingItem,
-          purchaseQuantity: existingItem.purchaseQuantity
+          purchaseQuantity: existingItem.purchaseQuantity +1
         }));
       } else {
         dispatch(addToCart({
