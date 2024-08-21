@@ -2,7 +2,6 @@ const { Cart, Category, Order, Product, Tag, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
@@ -136,8 +135,6 @@ const resolvers = {
       const url = new URL(context.headers.referer).origin;
 
       try {
-        // await Order.create({ products: products.map(({ _id }) => _id) });
-
         const lineItems = products.map(product => ({
           price_data:{
             currency: 'usd',
