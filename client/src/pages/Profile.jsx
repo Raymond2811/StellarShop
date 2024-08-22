@@ -14,7 +14,7 @@ export default function Profile() {
   const { loading, data, error } = useQuery(QUERY_USER);
   const [updateUser] = useMutation(UPDATE_USER);
   const [deleteUser] = useMutation(DELETE_USER);
-  const [clearCartMutatiion] = useMutation(CLEAR_CART);
+  const [clearCartMutation] = useMutation(CLEAR_CART);
 
   const [updateFormData, setUpdateFormData] = useState({
     firstName: '',
@@ -89,7 +89,7 @@ export default function Profile() {
 
   const handleLogout =  async () => {
     try {
-      await clearCartMutatiion();
+      await clearCartMutation();
       dispatch(clearCart());
       dispatch(logout());
       Auth.logout();
