@@ -141,7 +141,8 @@ const resolvers = {
             product_data: {
               name: product.name,
               description: product.description,
-              images: [product.image],
+              //only works with img urls!
+              // images: ['https://via.placeholder.com/150'],
             },
             unit_amount: Math.floor(product.price * 100),
           },

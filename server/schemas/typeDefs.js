@@ -63,6 +63,7 @@ const typeDefs = `
   input ProductInput {
     _id: ID
     purchaseQuantity: Int
+    description: String
     name: String
     image: String
     price: Float

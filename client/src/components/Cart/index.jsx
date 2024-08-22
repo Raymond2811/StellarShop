@@ -38,16 +38,17 @@ export default function Cart(){
         products: cartItems.map((product) => ({
           _id: product._id,
           name: product.name,
-          image: product.image,
+          // image: product.image,
+          description: product.description,
           price: product.price,
           purchaseQuantity: product.purchaseQuantity,
           quantity: product.quantity,
         })),
       },
      });
-     const stripe = await stripePromise;
-     await stripe.redirectToCheckout({sessionId: data.checkout.sessionId});
-
+            
+      const stripe = await stripePromise;
+      await stripe.redirectToCheckout({ sessionId: data.checkout.session });
     } catch (error) {
      console.error('Checkout Error:', error);
     }
