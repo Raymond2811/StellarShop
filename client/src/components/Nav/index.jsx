@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadCategories, setCurrentCategory } from '../../utils/slices/productSlice';
+import { loadCategories } from '../../utils/slices/productSlice';
+import { setCurrentCategory } from '../../utils/slices/currentCategorySlice';
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';

@@ -17,6 +17,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import productSlice from './utils/slices/productSlice';
 import userSlice from './utils/slices/userSlice';
 import cartSlice from './utils/slices/cartSlice';
+import currentCategorySlice from './utils/slices/currentCategorySlice';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const httpLink = createHttpLink({
@@ -41,13 +42,14 @@ const client = new ApolloClient({
 const persistConfig = {
   key: 'root',
   storage, // This tells Redux Persist to use localStorage (or another storage engine)
-  whitelist: ['cart'], // Only persist the cart slice
+  whitelist: ['cart', 'currentCategory'], // Only persist the cart slice
 };
 
 const rootReducer = combineReducers({
   products: productSlice,
   user: userSlice,
   cart: cartSlice,
+  currentCategory: currentCategorySlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

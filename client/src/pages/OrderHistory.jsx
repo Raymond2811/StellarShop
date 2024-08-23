@@ -13,7 +13,7 @@ export default function OrderHistory() {
         orders.map(order => (
           <div key={order._id} className="order">
             <h2>Order ID: {order._id}</h2>
-            <p>Date: {new Date(order.purchaseDate).toLocaleDateString()}</p>
+            <p>Date: {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}</p>
             <p>Status: {order.status}</p>
             <p>Total Amount: ${order.totalAmount.toFixed(2)}</p>
             <div className="order-products">

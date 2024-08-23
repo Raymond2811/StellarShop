@@ -7,7 +7,7 @@ import ProductItem from "../ProductItem";
 
 export default function ProductList() {
   const dispatch = useDispatch();
-  const { currentCategory } = useSelector((state) => state.products);
+  const { currentCategory } = useSelector((state) => state.currentCategory);
   const [getProducts, { data, loading, error } ]= useLazyQuery(QUERY_CATEGORY,{
     variables: {id: currentCategory},
   });
@@ -25,7 +25,6 @@ export default function ProductList() {
   }, [data, dispatch, loading]);
 
   if(error) return <p>Error: {error.message}</p>
-
 
   return(
     <div>
