@@ -6,6 +6,15 @@ import { loadStripe } from '@stripe/stripe-js';
 import { CLEAR_CART, CHECKOUT } from '../../utils/mutations';
 import { clearCart, toggleCart} from '../../utils/slices/cartSlice';
 import CartItem from '../CartItem';
+import {
+  Drawer,
+  IconButton,
+  Button,
+  Typography,
+  Box
+} from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CloseIcon from '@mui/icons-material/Close';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -59,26 +68,79 @@ export default function Cart(){
   }
 
   return(
-    <div className={`cart-container ${cartOpen ? 'open' : ''}`}>
-    <h2>Your Shopping Cart</h2>
-    {cartItems.length ? (
-      <div>
-        {cartItems.map((product) => (
-          <CartItem key={product._id} product={product} />
-        ))}
-        {Auth.loggedIn() ? (
-          <button onClick={handleCheckout}>Checkout</button>
+  <section>
+    <IconButton color="inherit" onClick={handleToggleCart}>
+      <ShoppingCartIcon />
+    </IconButton>
+    <Drawer
+      anchor="right"
+      open={cartOpen}
+      onClose={handleToggleCart}
+    >
+      <Box sx={{ width: 400, padding: 2 }}>
+        <Box sx={{
+          display: "flex",
+          justifyContent: 'end',
+          alignItems: 'center',
+          gap: 2,
+          marginBottom: 2,
+        }}
+        >
+          <Typography variant="h5" component="h2">
+            Your Shopping Cart
+            <IconButton 
+              color="inherit" 
+              onClick={handleToggleCart}
+              sx={{ marginLeft: 5 }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Typography>
+        </Box>
+
+        {cartItems.length ? (
+          <Box>
+            {cartItems.map((product) => (
+              <CartItem key={product._id} product={product} />
+            ))}
+            {Auth.loggedIn() ? (
+              <Button 
+                variant="contained" 
+                color="primary" 
+                fullWidth 
+                onClick={handleCheckout}
+                sx={{ marginTop: 2 }}
+              >
+                Checkout
+              </Button>
+            ) : (
+              <Button 
+                component={Link} 
+                to="/account" 
+                onClick={handleToggleCart}
+                fullWidth
+                sx={{ marginTop: 2 }}
+              >
+                Log In to Check Out!
+              </Button>
+            )}
+            <Button 
+              variant="outlined" 
+              color="secondary" 
+              fullWidth 
+              onClick={handleClearCart}
+              sx={{ marginTop: 2 }}
+            >
+              Clear Cart
+            </Button>
+          </Box>
         ) : (
-          <Link to="/account" onClick={handleToggleCart}>
-            Log In to Check Out!
-          </Link>
+          <Typography variant="body1"
+            sx={{display: 'flex', justifyContent: 'center'}}
+          >Your cart is empty.</Typography>
         )}
-        <button onClick={handleClearCart}>Clear Cart</button>
-      </div>
-    ) : (
-      <p>Your cart is empty.</p>
-    )}
-     <button onClick={handleToggleCart}>Close Cart</button>
-  </div>
+      </Box>
+    </Drawer>
+  </section>
   )
 }
