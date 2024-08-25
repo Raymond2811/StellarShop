@@ -3,6 +3,15 @@ import { REMOVE_FROM_CART, ADD_TO_CART } from "../../utils/mutations";
 import { removeFromCart, updateCartQuantity } from "../../utils/slices/cartSlice";
 import { useDispatch } from "react-redux";
 import Auth from "../../utils/auth";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Button,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function CartItem({product}) {
   const dispatch = useDispatch();
@@ -56,25 +65,57 @@ export default function CartItem({product}) {
   } 
   
   return (
-    <div className="cart-item">
-      <img src={product.image} alt={product.name} />
-      <h3>{product.name}</h3>
-      <p>Price: ${product.price}</p>
-      <p>Quantity: {product.purchaseQuantity}</p>
-      <div className="quantity-controls">
-        <button  
-          onClick={() => handleQuantityChange(-1)}
-        >
-          -
-        </button>
-        <span>{product.purchaseQuantity}</span>
-        <button  
-          onClick={() => handleQuantityChange(1)}
-        >
-          +
-        </button>
-      </div>
-      <button onClick={handleRemoveFromCart}>Remove</button>
-    </div>
+    <section className="cart-item">
+      <Box sx={{
+        display: 'flex',
+        alignItems:'center',
+        padding:2,
+        borderBottom: '1px solid black'
+      }}
+      >
+        <IconButton onClick={handleRemoveFromCart}>
+          <DeleteIcon fontSize="large"/>
+        </IconButton>
+
+        <img
+          src={product.image}
+          alt={product.name}
+          style={{ width: 120, height: 120, objectFit:  'cover', marginRight: 2}}
+        />
+
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="h7">{product.name}</Typography>
+          <Typography variant="body1">Price: ${product.price}</Typography>
+
+          <div 
+            className="quantity-controls"
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center',  
+            }}
+          >
+            <Typography variant="body2">Quantity:</Typography>
+            
+            <IconButton 
+              size="small" 
+              onClick={() => handleQuantityChange(-1)}
+              sx={{ marginLeft: 1, marginRight: 1 }}
+            >
+              <RemoveIcon />
+            </IconButton>
+
+            <Typography variant="body2">{product.purchaseQuantity}</Typography>
+            
+            <IconButton 
+              size="small" 
+              onClick={() => handleQuantityChange(1)}
+              sx={{ marginLeft: 1 }}
+            >
+              <AddIcon />
+            </IconButton>
+          </div>
+        </Box>
+      </Box>
+    </section>
   );
 }

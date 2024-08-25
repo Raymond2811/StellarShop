@@ -135,9 +135,12 @@ export default function Cart(){
             </Button>
           </Box>
         ) : (
-          <Typography variant="body1"
+          <Typography 
+            variant="body1"
             sx={{display: 'flex', justifyContent: 'center'}}
-          >Your cart is empty.</Typography>
+          >
+            Your cart is empty.
+          </Typography>
         )}
       </Box>
     </Drawer>
