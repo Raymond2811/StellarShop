@@ -7,7 +7,6 @@ import {
   Box,
   Typography,
   IconButton,
-  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -69,11 +68,10 @@ export default function CartItem({product}) {
       <Box sx={{
         display: 'flex',
         alignItems:'center',
-        padding:2,
         borderBottom: '1px solid black'
       }}
       >
-        <IconButton onClick={handleRemoveFromCart}>
+        <IconButton sx={{padding: 0}} onClick={handleRemoveFromCart}>
           <DeleteIcon fontSize="large"/>
         </IconButton>
 

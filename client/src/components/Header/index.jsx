@@ -11,6 +11,7 @@ export default function Header(){
   return(
     <header>
       <Box
+        className='header-container'
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -19,7 +20,14 @@ export default function Header(){
           backgroundColor: 'cyan'
         }}
       > 
-        <Box sx={{display: 'flex', alignItems:'center', gap: 2}}>
+        <Box 
+          className='header-elements'
+          sx={{
+            display: 'flex', 
+            alignItems:'center', 
+            gap: 2
+          }}
+        >
           <Link to='/' style={{ textDecoration: 'none', color: 'inherit'}}>
             <Typography variant='h4' component="h1">
               Stellar Shop
@@ -28,7 +36,14 @@ export default function Header(){
           <Nav/>
         </Box>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}}>
+        <Box 
+          className='header-elements'
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 2
+          }}
+        >
           <Link to={user ? '/profile' : '/account'}>
             <IconButton color='inherit'>
               <AccountCircleIcon fontSize='large'/>

@@ -24,3 +24,13 @@ body{
     display: block;
   }
 }
+
+@media (max-width: 550px){
+  header .header-container{
+    padding: 8px;
+  }
+
+  .header-container .header-elements{
+    gap: 4px;
+  }
+}

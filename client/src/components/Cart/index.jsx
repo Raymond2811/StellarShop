@@ -72,17 +72,17 @@ export default function Cart(){
     <IconButton color="inherit" onClick={handleToggleCart}>
       <ShoppingCartIcon />
     </IconButton>
+    
     <Drawer
       anchor="right"
       open={cartOpen}
       onClose={handleToggleCart}
     >
-      <Box sx={{ width: 400, padding: 2 }}>
+      <Box sx={{ width: 350, padding: 2 }}>
         <Box sx={{
           display: "flex",
           justifyContent: 'end',
           alignItems: 'center',
-          gap: 2,
           marginBottom: 2,
         }}
         >
@@ -91,7 +91,7 @@ export default function Cart(){
             <IconButton 
               color="inherit" 
               onClick={handleToggleCart}
-              sx={{ marginLeft: 5 }}
+              sx={{ marginLeft: 2 }}
             >
               <CloseIcon />
             </IconButton>
