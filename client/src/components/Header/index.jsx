@@ -1,12 +1,13 @@
 import Nav from '../Nav';
 import Cart from '../Cart';
-import Auth from '../../utils/auth';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Box, Typography, IconButton, Button } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Header(){
-  
+  const { user } = useSelector((state) => state.user)
+
   return(
     <header>
       <Box
@@ -28,7 +29,7 @@ export default function Header(){
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}}>
-          <Link to={Auth.loggedIn() ? '/profile' : '/account'}>
+          <Link to={user ? '/profile' : '/account'}>
             <IconButton color='inherit'>
               <AccountCircleIcon fontSize='large'/>
             </IconButton>
