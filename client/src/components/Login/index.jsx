@@ -5,6 +5,9 @@ import { QUERY_CART } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 export default function Login(){
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -63,26 +66,38 @@ export default function Login(){
     }
   }
 
-  return(
+  return (
     <div className='login-container'>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <input
-        type='text'
-        name='email'
-        value={formData.email}
-        onChange={handleChange}
-        placeholder='me@email.com'
-        /> 
-        <input
-        type='password'
-        name='password'
-        value={formData.password}
-        onChange={handleChange}
-        placeholder='password'
-        required
-        />
-        <button type='submit'>Login</button>
+        <Grid container direction="column" spacing={2}>
+          <Grid item>
+            <TextField
+            type='text'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            placeholder='me@email.com'
+            variant='standard'
+            label='Email'
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+            type='password'
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
+            placeholder='password'
+            required
+            variant='standard'
+            label='Password'
+            />
+          </Grid>
+          <Grid item>
+            <Button variant='contained' type='submit' >Login</Button>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );
