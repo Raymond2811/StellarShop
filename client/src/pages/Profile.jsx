@@ -7,6 +7,10 @@ import { clearCart } from '../utils/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import TextField  from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -105,64 +109,102 @@ export default function Profile() {
   return(
     <div className='profile-container'>
       <h1>Profile</h1>
-      <button onClick={handleViwOrderHistory}>View Order History</button>
       <h2>Hello {data?.user?.firstName} {data?.user?.lastName}</h2>
+      <Button variant='contained' onClick={handleViwOrderHistory}>View Order History</Button>
       <p>{data?.user?.email}</p>
       <form onSubmit={handleUpdateUser}>
-        <h2>Update Account</h2>
-        <input
-        type='text'
-        name='firstName'
-        value={updateFormData.firstName}
-        onChange={handleUpdateChange}
-        placeholder='First Name'
-        />
-        <input
-        type='text'
-        name='lastName'
-        value={updateFormData.lastName}
-        onChange={handleUpdateChange}
-        placeholder='Last Name'
-        />
-        <input
-        type='text'
-        name='email'
-        value={updateFormData.email}
-        onChange={handleUpdateChange}
-        placeholder='Email'
-        />
-        <input
-        type='password'
-        name='password'
-        value={updateFormData.password}
-        onChange={handleUpdateChange}
-        placeholder='Password'
-        />
-        <button type='submit'>Update Account</button>
+        <Paper 
+          elevation={3} 
+          style={{ 
+            padding: '20px', 
+            marginTop: '20px', 
+            width: '60%',
+            margin: '0 auto'
+          }}
+        >
+          <Grid justifyContent='center' alignItems='center' container direction='column' spacing={2}>
+            <h2>Update Account</h2>
+            <Grid item>
+              <TextField
+              type='text'
+              name='firstName'
+              value={updateFormData.firstName}
+              onChange={handleUpdateChange}
+              placeholder='First Name'
+              variant='standard'
+              label='First Name'
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+              type='text'
+              name='lastName'
+              value={updateFormData.lastName}
+              onChange={handleUpdateChange}
+              placeholder='Last Name'
+              variant='standard'
+              label='Last Name'
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+              type='text'
+              name='email'
+              value={updateFormData.email}
+              onChange={handleUpdateChange}
+              placeholder='Email'
+              variant='standard'
+              label='Email'
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+              type='password'
+              name='password'
+              value={updateFormData.password}
+              onChange={handleUpdateChange}
+              placeholder='Password'
+              variant='standard'
+              label='Password'
+              />
+            </Grid>
+            <Grid item>
+              <Button variant='contained' type='submit'>Update Account</Button>
+            </Grid>
+            <h2>Delete Account</h2>
+            <Grid item>
+              <TextField
+              type='text'
+              name='email'
+              value={deleteFormData.email}
+              onChange={handleDeleteChange}
+              placeholder='Email'
+              variant='standard'
+              label='Email'
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+              type='password'
+              name='password'
+              value={deleteFormData.password}
+              onChange={handleDeleteChange}
+              placeholder='Password'
+              variant='standard'
+              label='Password'
+              />
+            </Grid>
+            <Grid item>
+              <Button variant='contained' type='submit'>Delete Account</Button>
+            </Grid>
+            <Grid item>
+              <Button variant='contained' onClick={handleLogout}>
+                Logout
+              </Button> 
+            </Grid>
+          </Grid>
+        </Paper>
       </form>
-
-      <form onSubmit={handleDeleteUser}>
-        <h2>Delete Account</h2>
-        <input
-        type='text'
-        name='email'
-        value={deleteFormData.email}
-        onChange={handleDeleteChange}
-        placeholder='Email'
-        />
-        <input
-        type='password'
-        name='password'
-        value={deleteFormData.password}
-        onChange={handleDeleteChange}
-        placeholder='Password'
-        />
-        <button type='submit'>Delete Account</button>
-      </form>
-
-      <button onClick={handleLogout}>
-        Logout
-      </button>
     </div>
   )
 }
