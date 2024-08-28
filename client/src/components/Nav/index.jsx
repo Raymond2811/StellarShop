@@ -33,18 +33,18 @@ export default function Nav(){
   return (
     <nav>  
       <Box className='nav-container'>
-      {categories.map((category) =>(
-        <Link
-          key={category._id}
-          component={RouterLink}
-          to={`/${convertToUrlFriendly(category.name)}`}
-          underline="none"
-          color="inherit"
-          onClick={() => handleCategoryClick(category._id)}
-        >
-         <Button color='inherit'>{category.name}</Button>
-        </Link>
-      ))}
+        {categories.map((category) =>(
+          <Link
+            key={category._id}
+            component={RouterLink}
+            to={category.name.toLowerCase() === 'home' ? '/' : `/${convertToUrlFriendly(category.name)}`}
+            underline="none"
+            color="inherit"
+            onClick={() => handleCategoryClick(category._id)}
+          >
+          <Button color='inherit'>{category.name}</Button>
+          </Link>
+        ))}
       </Box>
 
       <Box className='side-nav'>
@@ -62,7 +62,7 @@ export default function Nav(){
               <Link
                 key={category._id}
                 component={RouterLink}
-                to={`/${convertToUrlFriendly(category.name)}`}
+                to={category.name.toLowerCase() === 'home' ? '/' : `/${convertToUrlFriendly(category.name)}`}
                 underline='none'
                 color='inherit'
                 onClick={() => handleCategoryClick(category._id)}
