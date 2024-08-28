@@ -4,6 +4,9 @@ import { ADD_USER, ADD_TO_CART } from "../../utils/mutations";
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 export default function CreateUser() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -58,41 +61,60 @@ export default function CreateUser() {
     <div>
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        placeholder="First Name"
-        required
-      />
-      <input
-        type="text"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        placeholder="Last Name"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Password"
-        required
-      />
-      <button type="submit">Create Account</button>
+        <Grid container direction="column">
+          <Grid item>
+            <TextField
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            placeholder="First Name"
+            required
+            variant='standard'
+            label='First Name'
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            placeholder="Last Name"
+            required
+            variant='standard'
+            label='Last Name'
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+            variant='standard'
+            label='Email'
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+            variant='standard'
+            label='Password'
+            />
+          </Grid>
+          <Grid item>
+            <Button variant='contained' type="submit">Create Account</Button>
+          </Grid>
+        </Grid>
       </form>
     </div>
-
   );
 };
