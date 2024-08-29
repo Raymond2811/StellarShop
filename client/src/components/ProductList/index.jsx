@@ -27,7 +27,7 @@ export default function ProductList() {
   if(error) return <p>Error: {error.message}</p>
 
   return(
-    <div>
+    <div className="product-list-container">
       {data?.category?.products.map((product)=> (
         <ProductItem key={product._id} product={product}/>
       ))}
