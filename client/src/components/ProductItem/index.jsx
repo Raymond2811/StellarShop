@@ -4,6 +4,8 @@ import { addToCart, updateCartQuantity } from '../../utils/slices/cartSlice';
 import { ADD_TO_CART } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
+import { Box, Typography, Button } from '@mui/material';
+import styled from '@emotion/styled';
 
 export default function ProductItem({ product }){
   const dispatch = useDispatch();
@@ -53,17 +55,53 @@ export default function ProductItem({ product }){
   };
 
   return (
-    <div className='product-item'>
-      <Link to={`/product/${product._id}`}>
-        <img src={product.image} alt={product.name}/>
-        <h3>{product.name}</h3>
-      </Link>
-      <p>${product.price}</p>
-      {product.quantity > 0 ? (
-        <button onClick={handleAddToCart}> Add to Cart </button> 
+    <section className='product-item'>
+      <Box sx={{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        padding: 2,
+        border: '1px solid #ddd',
+        borderRadius:'4px',
+        boxShadow:'0px 4px 6px rgba(0, 0, 0, 0.2)',
+        maxWidth:'300px',
+        margin:'auto',
+      }}
+      >
+        <Link 
+          to={`/product/${product._id}`} 
+          style={{ textDecoration: 'none', color: 'inherit'}}
+        >
+          <img
+            src={product.image}
+            alt={product.name}
+            style={{
+              width: '100%',
+              height: '200px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              marginBottom: '2px'
+            }}
+          />
+           <Typography variant='h6' component="h3" align="center" gutterBottom>
+            {product.name}
+          </Typography>
+        </Link>
+
+        <Typography variant='body1' color='textSecondary' align="center" gutterBottom>
+            ${product.price.toFixed(2)}
+        </Typography>
+
+        {product.quantity > 0 ? (
+          <Button variant='contained' color='primary' onClick={handleAddToCart}>
+            Add to Cart
+          </Button>
         ) : (
-        <p>Out of stock</p>
-      )}
-    </div>
+          <Typography variant='body2' color='error' align='center'>
+            Out of Stock
+          </Typography>
+        )}
+      </Box>
+    </section>
   );
 }
