@@ -5,6 +5,22 @@ import { QUERY_CATEGORY } from '../utils/queries';
 import ProductItem from '../components/ProductItem';
 import { loadProductsByCategory } from '../utils/slices/productSlice';
 import { setCurrentCategory } from "../utils/slices/currentCategorySlice";
+import { Grid, Typography, Container } from '@mui/material';
+
+const ProductGridSection = ({ title, products }) => (
+  <div>
+    <Typography variant="h5" gutterBottom>
+      {title}
+    </Typography>
+    <Grid container spacing={2}>
+      {products.map((product) => (
+        <Grid item xs={6} key={product._id} component='article'>
+          <ProductItem product={product}/>
+        </Grid>
+      ))}
+    </Grid>
+  </div>
+);
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -38,34 +54,34 @@ export default function Home() {
 
   return(
     <main>
-      <h1>Home</h1>
+      <Typography variant='h4' gutterBottom>
+        Home
+      </Typography>
 
-      <section>
-        <h2>Best Sellers</h2>
-        <div className="product-grid">
-          {bestSellers.map((product)  => (
-            <ProductItem key={product._id} product={product}/>
-          ))}
-        </div>
-      </section>
+      <Container className="home-container">
+        <Grid container spacing={3}>
 
-      <section>
-        <h2>New Arrivals</h2>  
-        <div className="product-grid">
-          {newArrivals.map((product) => (
-            <ProductItem key={product._id} product={product}/>
-          ))}
-        </div>      
-      </section>
+          <Grid item xs={12} md={6} component="section">
+            <ProductGridSection title="Best Sellers" products={bestSellers}/>
+          </Grid>
+          
+          <Grid item xs={12} md={6} component='section'>
+            <ProductGridSection title="New Arrivals" products={newArrivals}/>
+          </Grid>
 
-      <section>
-        <h2>More Products</h2>
-        <div className="product-grid">
-          {remainingProducts.map((product) => (
-            <ProductItem key={product._id} product={product}/>
-          ))}
-        </div>
-      </section>
+          <Typography variant="h5" gutterBottom style={{marginTop: '15px', paddingLeft: '20px'}}>
+            More Products
+          </Typography>
+          <Grid container spacing={2} sx={{margin: 0}} component='section'>
+            {remainingProducts.map((product) => (
+              <Grid item xs={12} sm={6} md={3} key={product._id} component='article'>
+                <ProductItem product={product}/>
+              </Grid>
+            ))}
+          </Grid>
+
+        </Grid>
+      </Container>
     </main>
   )
 }
