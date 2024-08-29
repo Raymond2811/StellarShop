@@ -6,6 +6,10 @@ body{
   margin: 0;
 }
 
+main{
+  padding: 15px;
+}
+
 .nav-container{
   display: flex;
   gap: 16px
