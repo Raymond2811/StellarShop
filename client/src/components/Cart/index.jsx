@@ -55,8 +55,9 @@ export default function Cart(){
         })),
       },
      });
-            
+      
       const stripe = await stripePromise;
+      dispatch(toggleCart());
       await stripe.redirectToCheckout({ sessionId: data.checkout.session });
     } catch (error) {
      console.error('Checkout Error:', error);
