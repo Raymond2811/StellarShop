@@ -6,7 +6,7 @@ import { Box, Typography, IconButton, Button } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Header(){
-  const { user } = useSelector((state) => state.user)
+  const { isAuthenticated } = useSelector((state) => state.user)
 
   return(
     <header>
@@ -44,7 +44,7 @@ export default function Header(){
             gap: 2
           }}
         >
-          <Link to={user ? '/profile' : '/account'}>
+          <Link to={isAuthenticated ? '/profile' : '/account'}>
             <IconButton color='inherit'>
               <AccountCircleIcon fontSize='large'/>
             </IconButton>

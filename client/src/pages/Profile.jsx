@@ -34,7 +34,7 @@ export default function Profile() {
 
   useEffect(() => {
     if(data?.user){
-      dispatch(login(data.user));
+      dispatch(login());
     }
   },[data, dispatch])
 
@@ -195,7 +195,7 @@ export default function Profile() {
               />
             </Grid>
             <Grid item>
-              <Button variant='contained' type='submit'>Delete Account</Button>
+              <Button onSubmit={handleDeleteUser}variant='contained' type='submit'>Delete Account</Button>
             </Grid>
             <Grid item>
               <Button variant='contained' onClick={handleLogout}>
