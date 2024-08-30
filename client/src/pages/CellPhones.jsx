@@ -2,10 +2,10 @@ import ProductList from "../components/ProductList";
 
 export default function CellPhones() {
   return(
-    <div>
+    <main>
       <h1>Cell Phones</h1>
 
       <ProductList/>
-    </div>
+    </main>
   )
 }
