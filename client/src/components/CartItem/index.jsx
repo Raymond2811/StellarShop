@@ -20,6 +20,10 @@ export default function CartItem({product}) {
   const handleQuantityChange = async (amount) => {
     const newQuantity = product.purchaseQuantity + amount;
 
+    if(newQuantity > product.quantity){
+      return;
+    }
+
     if(newQuantity > 0) {
       if(!Auth.loggedIn()) {
         dispatch(updateCartQuantity({
