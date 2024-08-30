@@ -10,6 +10,7 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from "../utils/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_PRODUCT } from "../utils/queries";
 import Auth from '../utils/auth';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 
 export default function Detail() {
   const { id } = useParams();
@@ -93,27 +94,66 @@ export default function Detail() {
     navigate(-1);
   };
 
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+  
   if(!product) return <p>Product not found</p>;
 
   return(
-    <div className="product-detail">
-      <button onClick={handleGoBack}>Go Back</button>
-      <h1>Detail</h1>
-      <img src={product.image} alt={product.name}/>
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-      <p>{product.price}</p>
-      <p>
-        {product.quantity > 0 ? `In Stock: ${product.quantity}` : 'Out of Stock'}
-      </p>
-      <button onClick={handleAddToCart} disabled={product.quantity === 0}>
-        Add to Cart
-      </button>
-      {cartItems.find((item) => item._id === product._id) && (
-        <button onClick={handleRemoveFromCart}>
-          Remove from Cart
-        </button>
-      )}
-    </div>
+    <main className="product-detail">
+      <Box>
+        <Button variant='contained' onClick={handleGoBack} sx={{marginBottom:'20px'}}>
+          Go Back
+        </Button>
+
+        <Typography variant="h3" gutterBottom>
+          {product.name}
+        </Typography>
+   
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{width: "100%"}}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6} sx={{display:'flex', flexDirection:'column',justifyContent:'center'}}>
+            <Typography variant="h5" align="center" paragraph>
+              {product.description}
+            </Typography>
+            <Typography align="center" variant="h6">
+              Price: ${product.price}
+            </Typography>
+            <Typography variant="h6" align="center" color={product.quantity > 0 ? 'black' : 'error'}>
+              {product.quantity > 0 ? `In Stock: ${product.quantity}` : 'Out of Stock'}
+            </Typography>
+
+            <Box sx={{marginTop: '20px', display:'flex', justifyContent:'center'}}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddToCart}
+                disabled={product.quantity === 0}
+                sx={{ marginRight: '10px'}}
+              >
+                Add to Cart
+              </Button>
+              {cartItems.find((item) => item._id === product._id) && (
+                <Button variant='contained' color='secondary' onClick={handleRemoveFromCart}>
+                  Remove from Cart
+                </Button>
+              )}
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+    </main>
   )
 };
