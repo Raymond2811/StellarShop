@@ -4,6 +4,7 @@ import { useLazyQuery } from "@apollo/client";
 import { QUERY_CATEGORY } from "../../utils/queries";
 import { loadProductsByCategory } from "../../utils/slices/productSlice";
 import ProductItem from "../ProductItem";
+import { Grid, Container } from '@mui/material';
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -28,9 +29,15 @@ export default function ProductList() {
 
   return(
     <div className="product-list-container">
-      {data?.category?.products.map((product)=> (
-        <ProductItem key={product._id} product={product}/>
-      ))}
+      <Container>
+        <Grid container spacing={3}>
+          {data?.category?.products.map((product) => (
+            <Grid item xs={6} md={3} key={product._id}>
+              <ProductItem product={product}/>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </div>
   )
 }
