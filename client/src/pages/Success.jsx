@@ -54,9 +54,9 @@ export default function Success() {
   },[addOrder, updateProduct, clearCartMutation]);
 
   return(
-    <div>
+    <main>
       <h1>Success</h1>
       <p>Your order was successful! Redirecting you to the home page... </p>
-    </div>
+    </main>
   )
 }
