@@ -13,6 +13,10 @@ const categorySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Product',
   }],
+  sortOrder: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Category = mongoose.model('Category',categorySchema);
