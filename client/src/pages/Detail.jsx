@@ -10,7 +10,8 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from "../utils/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_PRODUCT } from "../utils/queries";
 import Auth from '../utils/auth';
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { PacmanLoader } from 'react-spinners';
 
 export default function Detail() {
   const { id } = useParams();
@@ -97,7 +98,7 @@ export default function Detail() {
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <CircularProgress />
+        <PacmanLoader color="#FFD700" size={40}/>
       </Box>
     );
   }

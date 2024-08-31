@@ -4,7 +4,8 @@ import { useLazyQuery } from "@apollo/client";
 import { QUERY_CATEGORY } from "../../utils/queries";
 import { loadProductsByCategory } from "../../utils/slices/productSlice";
 import ProductItem from "../ProductItem";
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Box } from '@mui/material';
+import { PacmanLoader } from 'react-spinners';
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -26,6 +27,14 @@ export default function ProductList() {
   }, [data, dispatch, loading]);
 
   if(error) return <p>Error: {error.message}</p>
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <PacmanLoader color="#FFD700" size={40}/>
+      </Box>
+    );
+  }
 
   return(
     <div className="product-list-container">
