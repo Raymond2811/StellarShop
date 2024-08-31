@@ -30,7 +30,7 @@ const resolvers = {
     }, 
     categories: async () => {
       try{
-        return await Category.find();
+        return await Category.find().sort({ sortOrder: 1 });
       } catch(error){
         throw new Error(`Error fetching categories: ${error.message}`)
       }

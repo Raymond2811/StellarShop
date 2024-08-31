@@ -10,11 +10,11 @@ async function seedData() {
     await cleanDB('User', 'users');
 
     const categories = await Category.insertMany([
-      { name: 'Home'},
-      { name: 'Computers' },
-      { name: 'Video Games' },
-      { name: 'Cell Phones' },
-      { name: 'Cameras' }
+      { name: 'Home', sortOrder: 1},
+      { name: 'Computers', sortOrder: 2 },
+      { name: 'Video Games', sortOrder: 3 },
+      { name: 'Cell Phones', sortOrder: 4 },
+      { name: 'Cameras', sortOrder: 5 }
     ]);
 
     const categoryMap = categories.reduce((map, category) => {
