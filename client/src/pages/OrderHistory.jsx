@@ -1,12 +1,20 @@
 import { useQuery } from '@apollo/client';
 import { QUERY_ORDERS } from '../utils/queries';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import { Paper, Grid, Box } from '@mui/material';
+import { PacmanLoader } from 'react-spinners';
 
 export default function OrderHistory() {
   const { loading, error, data } = useQuery(QUERY_ORDERS);
   
   const orders  = data?.orders;
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <PacmanLoader color="#FFD700" size={40}/>
+      </Box>
+    );
+  }
 
   return(
     <div>
