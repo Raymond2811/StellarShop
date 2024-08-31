@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ADD_ORDER, UPDATE_PRODUCT, CLEAR_CART } from "../utils/mutations";
 import { clearCart } from '../utils/slices/cartSlice';
+import { Box, Typography } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 export default function Success() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -55,8 +57,22 @@ export default function Success() {
 
   return(
     <main>
-      <h1>Success</h1>
-      <p>Your order was successful! Redirecting you to the home page... </p>
+      <Box
+        display='flex'
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        height='100vh'
+        bgcolor='#f0f4f8'
+      >
+        <CheckCircleOutlineIcon style={{ fontSize: 80, color:'#4caf50'}}/>
+        <Typography variant="h2" align="center" gutterBottom>
+          Success!
+        </Typography>
+        <Typography variant="body1" align="center" gutterBottom>
+          Your order was successful! Redirecting you to the home page...
+        </Typography>
+      </Box>
     </main>
   )
 }
