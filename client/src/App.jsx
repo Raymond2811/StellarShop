@@ -9,6 +9,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import IdleTimer from './components/IdleTimer';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
@@ -75,6 +76,7 @@ function App() {
           <IdleTimer/>
           <Header/>
           <Outlet/>
+          <Footer/>
         </PersistGate>
       </Provider>
     </ApolloProvider>

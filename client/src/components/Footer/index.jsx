@@ -1,0 +1,109 @@
+import {
+  Container,
+  Grid,
+  Typography,
+  Link,
+  Button,
+  TextField,
+  IconButton
+} from '@mui/material';
+import { Facebook, Instagram } from '@mui/icons-material';
+import XIcon from '@mui/icons-material/X';
+
+export default function Footer() {
+  return (
+    <footer style={{ backgroundColor: '#f1f1f1', padding: '20px', marginTop: '20px' }}>
+      <Container>
+        <Grid container spacing={2} justifyContent="center">
+          
+          {/* newsletter */}
+          <Grid item xs={12} sm={4} textAlign="center" style={{ padding: 10 }}>
+            <Typography variant="body1" gutterBottom>
+              Sign up for exclusive offers!
+            </Typography>
+            <form 
+              style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center' 
+              }}
+            >
+              <TextField
+                label="Enter Email Address"
+                variant="outlined"
+                size="small"
+                type="email"
+                name="email"
+                style={{ marginBottom: '10px' }}
+              />
+              <Button 
+                variant="contained" 
+                color="primary" 
+                type="submit" 
+                disabled
+              >
+                Subscribe
+              </Button>
+            </form>
+          </Grid>
+
+          {/* Links */}
+          <Grid item xs={12} sm={4} style={{ padding: 10 }}>
+            <Typography variant="body1" gutterBottom textAlign="center">
+              <Link color="inherit" style={{ margin: '0 10px' }}>
+                About Us
+              </Link>
+              <Link color="inherit" style={{ margin: '0 10px' }}>
+                Contact
+              </Link>
+              <Link color="inherit" style={{ margin: '0 10px' }}>
+                Privacy Policy
+              </Link>
+              <Link color="inherit" style={{ margin: '0 10px' }}>
+                Terms of Service
+              </Link>
+            </Typography>
+          </Grid>
+
+          {/* Socials */}
+          <Grid item xs={12} sm={4} textAlign="center" style={{ padding: 10 }}>
+            <Typography variant="body1" gutterBottom>
+              <IconButton 
+                color="inherit" 
+                href="https://facebook.com" 
+                target="_blank" 
+                style={{ margin: '0 10px' }}
+              >
+                <Facebook fontSize="large" />
+              </IconButton>
+              <IconButton 
+                color="inherit" 
+                href="https://twitter.com" 
+                target="_blank" 
+                style={{ margin: '0 10px' }}
+              >
+                <XIcon fontSize="large" />
+              </IconButton>
+              <IconButton 
+                color="inherit" 
+                href="https://instagram.com" 
+                target="_blank" 
+                style={{ margin: '0 10px' }}
+              >
+                <Instagram fontSize="large" />
+              </IconButton>
+            </Typography>
+          </Grid>
+          
+          {/* Rights */}
+          <Grid item xs={12} sm={4}>
+            <Typography variant="body2" color="textSecondary" textAlign="center">
+              &copy; 2024 StellarShop. All Rights Reserved.
+            </Typography>
+          </Grid>
+
+        </Grid>
+      </Container>
+    </footer>
+  );
+}
