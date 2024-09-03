@@ -17,7 +17,7 @@ export default function Footer() {
         sx={{
           backgroundImage: (theme) => theme.palette.gradients.main,
           marginTop:'20px',
-          padding: '20px 0',
+          padding: '20px',
           width: '100%',
           color: (theme) => theme.palette.text.primary,
         }}
@@ -96,7 +96,6 @@ export default function Footer() {
                 color="inherit" 
                 href="https://facebook.com" 
                 target="_blank" 
-                style={{ margin: '0 10px' }}
               >
                 <Facebook fontSize="large" />
               </IconButton>
@@ -104,7 +103,6 @@ export default function Footer() {
                 color="inherit" 
                 href="https://twitter.com" 
                 target="_blank" 
-                style={{ margin: '0 10px' }}
               >
                 <XIcon fontSize="large" />
               </IconButton>
@@ -112,7 +110,6 @@ export default function Footer() {
                 color="inherit" 
                 href="https://instagram.com" 
                 target="_blank" 
-                style={{ margin: '0 10px' }}
               >
                 <Instagram fontSize="large" />
               </IconButton>
