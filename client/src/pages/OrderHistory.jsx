@@ -1,12 +1,17 @@
 import { useQuery } from '@apollo/client';
 import { QUERY_ORDERS } from '../utils/queries';
-import { Paper, Grid, Box } from '@mui/material';
+import { Paper, Grid, Box, Button } from '@mui/material';
 import { PacmanLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 
 export default function OrderHistory() {
   const { loading, error, data } = useQuery(QUERY_ORDERS);
-  
+  const navigate = useNavigate();
   const orders  = data?.orders;
+  
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   if (loading) {
     return (
@@ -17,7 +22,18 @@ export default function OrderHistory() {
   }
 
   return(
-    <div>
+    <main>
+      <Button 
+          variant='contained' 
+          onClick={handleGoBack} 
+          sx={{
+            marginBottom:'20px',
+            backgroundImage: (theme) => theme.palette.gradients.main 
+          }}
+        >
+          Go Back
+        </Button>
+
       <h1>Order History</h1>
       {orders?.length ? (
         orders.map(order => (
@@ -47,6 +63,6 @@ export default function OrderHistory() {
       ) : (
         <p>No orders found.</p>
       )}
-    </div>
+    </main>
   ); 
 }
