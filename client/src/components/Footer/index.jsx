@@ -1,19 +1,26 @@
 import {
-  Container,
   Grid,
   Typography,
   Link,
   Button,
   TextField,
-  IconButton
+  IconButton,
+  Box
 } from '@mui/material';
 import { Facebook, Instagram } from '@mui/icons-material';
 import XIcon from '@mui/icons-material/X';
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: '#f1f1f1', padding: '20px', marginTop: '20px' }}>
-      <Container>
+    <footer>
+      <Box
+        sx={{
+          backgroundImage: (theme) => theme.palette.gradients.main,
+          padding: '20px 0',
+          width: '100%',
+          color: (theme) => theme.palette.text.primary,
+        }}
+      >
         <Grid container spacing={2} justifyContent="center">
           
           {/* newsletter */}
@@ -34,11 +41,27 @@ export default function Footer() {
                 size="small"
                 type="email"
                 name="email"
-                style={{ marginBottom: '10px' }}
+                style={{ margin: '5px 0' }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: '#fff', 
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#fff', 
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: '#fff',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    color: '#fff',
+                  },
+                }}
               />
               <Button 
                 variant="contained" 
-                color="primary" 
+                color="inherit" 
                 type="submit" 
                 disabled
               >
@@ -96,14 +119,14 @@ export default function Footer() {
           </Grid>
           
           {/* Rights */}
-          <Grid item xs={12} sm={4}>
-            <Typography variant="body2" color="textSecondary" textAlign="center">
+          <Grid item xs={12} sm={4} style={{padding: '0 0 10px 0'}}>
+            <Typography variant="body1" color="inherit" textAlign="center">
               &copy; 2024 StellarShop. All Rights Reserved.
             </Typography>
           </Grid>
 
         </Grid>
-      </Container>
+      </Box>
     </footer>
   );
 }
