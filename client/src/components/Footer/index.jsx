@@ -16,6 +16,7 @@ export default function Footer() {
       <Box
         sx={{
           backgroundImage: (theme) => theme.palette.gradients.main,
+          marginTop:'20px',
           padding: '20px 0',
           width: '100%',
           color: (theme) => theme.palette.text.primary,
