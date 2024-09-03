@@ -3,7 +3,7 @@ import Cart from '../Cart';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Box, Typography, IconButton, Button } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonOutlineRounded from '@mui/icons-material/PersonOutlineRounded';
 
 export default function Header(){
   const { isAuthenticated } = useSelector((state) => state.user)
@@ -16,8 +16,8 @@ export default function Header(){
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '0 16px',
-          backgroundColor: 'cyan'
+          padding: '20px',
+          backgroundImage: (theme) => theme.palette.gradients.main,
         }}
       > 
         <Box 
@@ -25,7 +25,8 @@ export default function Header(){
           sx={{
             display: 'flex', 
             alignItems:'center', 
-            gap: 2
+            gap: 2,
+            color: (theme) => theme.palette.text.primary,
           }}
         >
           <Link to='/' style={{ textDecoration: 'none', color: 'inherit'}}>
@@ -41,15 +42,16 @@ export default function Header(){
           sx={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: 2
+            gap: 2,
+            color: (theme) => theme.palette.text.primary,
           }}
         >
           <Link to={isAuthenticated ? '/profile' : '/account'}>
-            <IconButton color='inherit'>
-              <AccountCircleIcon fontSize='large'/>
+            <IconButton sx={{ color: (theme) => theme.palette.text.primary}}>
+              <PersonOutlineRounded fontSize='large' sx={{ color: 'inherit' }}/>
             </IconButton>
           </Link>
-          <Cart/>
+          <Cart fontSize='large'/>
         </Box>
       </Box>
     </header>
