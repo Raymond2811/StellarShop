@@ -72,17 +72,29 @@ export default function CartItem({product}) {
       <Box sx={{
         display: 'flex',
         alignItems:'center',
-        borderBottom: '1px solid black'
+        borderBottom: '1px solid white'
       }}
       >
-        <IconButton sx={{padding: 0}} onClick={handleRemoveFromCart}>
+        <IconButton 
+          sx={{
+            padding: 0, 
+            color: (theme) => theme.palette.text.primary,
+          }} 
+          onClick={handleRemoveFromCart}
+        >
           <DeleteIcon fontSize="large"/>
         </IconButton>
 
         <img
           src={product.image}
           alt={product.name}
-          style={{ width: 120, height: 120, objectFit:  'cover', marginRight: 2}}
+          style={{ 
+            width: '100%', 
+            height: 120, 
+            objectFit:'cover', 
+            padding:'10px',
+            borderRadius:'15px'
+          }}
         />
 
         <Box sx={{ flexGrow: 1 }}>
@@ -101,7 +113,8 @@ export default function CartItem({product}) {
             <IconButton 
               size="small" 
               onClick={() => handleQuantityChange(-1)}
-              sx={{ marginLeft: 1, marginRight: 1 }}
+              sx={{ marginLeft: 1, marginRight: 1, }}
+              color='inherit'
             >
               <RemoveIcon />
             </IconButton>
@@ -111,7 +124,8 @@ export default function CartItem({product}) {
             <IconButton 
               size="small" 
               onClick={() => handleQuantityChange(1)}
-              sx={{ marginLeft: 1 }}
+              sx={{ marginLeft: 1,}}
+              color='inherit'
             >
               <AddIcon />
             </IconButton>

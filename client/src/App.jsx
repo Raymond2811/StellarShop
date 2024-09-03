@@ -5,11 +5,14 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import { ThemeProvider } from '@mui/material/styles';
 import { setContext } from '@apollo/client/link/context';
 
 import IdleTimer from './components/IdleTimer';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import theme from './utils/theme';
+
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
@@ -73,10 +76,12 @@ function App() {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <IdleTimer/>
-          <Header/>
-          <Outlet/>
-          <Footer/>
+          <ThemeProvider theme={theme}>
+            <IdleTimer/>
+            <Header/>
+            <Outlet/>
+            <Footer/>
+          </ThemeProvider>
         </PersistGate>
       </Provider>
     </ApolloProvider>

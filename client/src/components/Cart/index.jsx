@@ -13,7 +13,7 @@ import {
   Typography,
   Box
 } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
@@ -71,7 +71,7 @@ export default function Cart(){
   return(
   <section>
     <IconButton color="inherit" onClick={handleToggleCart}>
-      <ShoppingCartIcon />
+      <ShoppingCartOutlined fontSize='large'/>
     </IconButton>
     
     <Drawer
@@ -79,7 +79,13 @@ export default function Cart(){
       open={cartOpen}
       onClose={handleToggleCart}
     >
-      <Box sx={{ width: 350, padding: 2 }}>
+      <Box sx={{ 
+        width: 350, 
+        padding: 2, 
+        backgroundImage: (theme) => theme.palette.gradients.main, 
+        height:'100%',
+        }}
+      >
         <Box sx={{
           display: "flex",
           justifyContent: 'end',
@@ -106,11 +112,11 @@ export default function Cart(){
             ))}
             {Auth.loggedIn() ? (
               <Button 
-                variant="contained" 
-                color="primary" 
+                variant="outlined" 
+                color="inherit" 
                 fullWidth 
                 onClick={handleCheckout}
-                sx={{ marginTop: 2 }}
+                sx={{ marginTop: 2, }}
               >
                 Checkout
               </Button>
@@ -120,6 +126,7 @@ export default function Cart(){
                 to="/account" 
                 onClick={handleToggleCart}
                 fullWidth
+                color='inherit'
                 sx={{ marginTop: 2 }}
               >
                 Log In to Check Out!
@@ -127,7 +134,7 @@ export default function Cart(){
             )}
             <Button 
               variant="outlined" 
-              color="secondary" 
+              color="inherit" 
               fullWidth 
               onClick={handleClearCart}
               sx={{ marginTop: 2 }}
