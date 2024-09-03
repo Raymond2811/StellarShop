@@ -77,7 +77,7 @@ export default function ProductItem({ product }){
             alt={product.name}
             style={{
               width: '100%',
-              height: '200px',
+              height: 'auto',
               objectFit: 'cover',
               borderRadius: '8px',
               marginBottom: '2px'
@@ -93,7 +93,11 @@ export default function ProductItem({ product }){
         </Typography>
 
         {product.quantity > 0 ? (
-          <Button variant='contained' color='primary' onClick={handleAddToCart}>
+          <Button 
+            variant='contained'
+            onClick={handleAddToCart}
+            sx={{backgroundImage: (theme) => theme.palette.gradients.main}}
+          >
             Add to Cart
           </Button>
         ) : (
