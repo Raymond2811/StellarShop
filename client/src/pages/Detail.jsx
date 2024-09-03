@@ -108,7 +108,14 @@ export default function Detail() {
   return(
     <main className="product-detail">
       <Box>
-        <Button variant='contained' onClick={handleGoBack} sx={{marginBottom:'20px'}}>
+        <Button 
+          variant='contained' 
+          onClick={handleGoBack} 
+          sx={{
+            marginBottom:'20px',
+            backgroundImage: (theme) => theme.palette.gradients.main 
+          }}
+        >
           Go Back
         </Button>
 
@@ -125,7 +132,13 @@ export default function Detail() {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} sx={{display:'flex', flexDirection:'column',justifyContent:'center'}}>
+          <Grid item xs={12} md={6} 
+            sx={{
+              display:'flex', 
+              flexDirection:'column',
+              justifyContent:'start',
+              }}
+            >
             <Typography variant="h5" align="center" paragraph>
               {product.description}
             </Typography>
@@ -142,12 +155,15 @@ export default function Detail() {
                 color="primary"
                 onClick={handleAddToCart}
                 disabled={product.quantity === 0}
-                sx={{ marginRight: '10px'}}
+                sx={{ 
+                  marginRight: '10px',
+                  backgroundImage: (theme) => theme.palette.gradients.main
+                }}
               >
                 Add to Cart
               </Button>
               {cartItems.find((item) => item._id === product._id) && (
-                <Button variant='contained' color='secondary' onClick={handleRemoveFromCart}>
+                <Button variant='contained' color='error' onClick={handleRemoveFromCart}>
                   Remove from Cart
                 </Button>
               )}
