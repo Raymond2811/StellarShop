@@ -12,7 +12,7 @@ import XIcon from '@mui/icons-material/X';
 
 export default function Footer() {
   return (
-    <footer>
+    <footer style={{marginTop: 'auto'}}>
       <Box
         sx={{
           backgroundImage: (theme) => theme.palette.gradients.main,

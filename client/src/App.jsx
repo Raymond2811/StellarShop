@@ -78,9 +78,13 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider theme={theme}>
             <IdleTimer/>
-            <Header/>
-            <Outlet/>
-            <Footer/>
+            <div style={{display:'flex', flexDirection:'column', minHeight: '100vh'}}>
+              <Header/>
+              <div style={{flex:'1'}}>
+                <Outlet/>
+              </div>
+              <Footer/>
+            </div>
           </ThemeProvider>
         </PersistGate>
       </Provider>
