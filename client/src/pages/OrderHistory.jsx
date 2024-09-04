@@ -37,8 +37,18 @@ export default function OrderHistory() {
       <h1>Order History</h1>
       {orders?.length ? (
         orders.map(order => (
-          <Paper key={order._id} elevation={3} style={{ width:'60%', padding: '2%', margin: '2% auto' }}>
-            <h2>Order ID: {order._id}</h2>
+          <Paper 
+            key={order._id} 
+            elevation={3} 
+            sx={{
+              width: '100%', 
+              maxWidth: '800px', 
+              padding: '2%', 
+              margin: '2% auto', 
+              color: (theme) => theme.palette.text.secondary
+            }}
+          >
+            <h3>Order ID: {order._id}</h3>
             <p>Date: {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}</p>
             <p>Status: {order.status}</p>
             <p>Total Amount: ${order.totalAmount.toFixed(2)}</p>
