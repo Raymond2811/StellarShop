@@ -1,7 +1,14 @@
 const { User, Product, Category } = require('../models');
-const products  = require('./seedData');
 const cleanDB = require('./cleanDB');
 const db = require('./connection');
+
+const computers = require('./seedData/computers');
+const cameras = require('./seedData/cameras');
+const cellPhones = require('./seedData/cellPhones');
+const videoGames = require('./seedData/videoGames');
+const home = require('./seedData/home');
+
+const products = [ ...computers, ...cameras, ...cellPhones, ...videoGames, ...home ];
 
 async function seedData() {
   try {
