@@ -108,10 +108,14 @@ export default function Profile() {
 
   return(
     <div className='profile-container'>
-      <h1>Profile</h1>
-      <h2>Hello {data?.user?.firstName} {data?.user?.lastName}</h2>
-      <Button variant='contained' onClick={handleViwOrderHistory}>View Order History</Button>
-      <p>{data?.user?.email}</p>
+      <h1 style={{marginLeft:'10%'}}>Profile</h1>
+      <Grid container justifyContent='space-between' alignItems='center'>
+        <h2 style={{marginLeft: '10%'}}>Hello {data?.user?.firstName} {data?.user?.lastName}</h2>
+        <Button variant='contained' onClick={handleViwOrderHistory} style={{marginRight:'10%'}}>
+          View Order History
+        </Button>
+      </Grid>
+      <p style={{marginLeft:'10%'}}>{data?.user?.email}</p>
       <form onSubmit={handleUpdateUser}>
         <Paper 
           elevation={3} 
