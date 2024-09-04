@@ -83,7 +83,7 @@ export default function Cart(){
         width: 350, 
         padding: 2, 
         backgroundImage: (theme) => theme.palette.gradients.main, 
-        height:'100%',
+        height:'auto',
         }}
       >
         <Box sx={{
