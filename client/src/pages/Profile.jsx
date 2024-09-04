@@ -7,18 +7,30 @@ import { clearCart } from '../utils/slices/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import TextField  from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import {
+  Button,
+  TextField,
+  Grid,
+  Paper,
+  Modal,
+  Box,
+  Typography,
+} from '@mui/material';
 
 export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, data, error } = useQuery(QUERY_USER);
+  const { data } = useQuery(QUERY_USER);
   const [updateUser] = useMutation(UPDATE_USER);
   const [deleteUser] = useMutation(DELETE_USER);
   const [clearCartMutation] = useMutation(CLEAR_CART);
+
+  const [open, setOpen] =useState(false);
+  const handleOpen = (e) => {
+    e.preventDefault();
+    setOpen(true);
+  }
+  const handleClose = () => setOpen(false);
 
   const [updateFormData, setUpdateFormData] = useState({
     firstName: '',
@@ -72,7 +84,6 @@ export default function Profile() {
   }
 
   const handleDeleteUser = async (e) => {
-    e.preventDefault();
 
     try {
       await deleteUser({
@@ -102,113 +113,226 @@ export default function Profile() {
     }
   };
 
-  const handleViwOrderHistory = () => {
+  const handleViewOrderHistory = () => {
     navigate('/orderhistory');
   };
 
   return(
-    <div className='profile-container'>
-      <h1 style={{marginLeft:'10%'}}>Profile</h1>
-      <Grid container justifyContent='space-between' alignItems='center'>
-        <h2 style={{marginLeft: '10%'}}>Hello {data?.user?.firstName} {data?.user?.lastName}</h2>
-        <Button variant='contained' onClick={handleViwOrderHistory} style={{marginRight:'10%'}}>
-          View Order History
-        </Button>
+    <main className='profile-container'>
+      <h1>Profile</h1>
+      <Grid 
+        container 
+        justifyContent='space-between' 
+        alignItems='center'
+        style={{ padding: '0 10px', marginBottom: '20px' }}
+      >
+       <Grid item>
+        <h2>Hello, {data?.user?.firstName} {data?.user?.lastName}</h2>
+        </Grid>
+        <Grid item>
+          <Button 
+            variant="contained" 
+            onClick={handleViewOrderHistory}
+            sx={{backgroundImage:(theme) => theme.palette.gradients.main}}
+          >
+            View Order History
+          </Button>
+        </Grid>
       </Grid>
-      <p style={{marginLeft:'10%'}}>{data?.user?.email}</p>
-      <form onSubmit={handleUpdateUser}>
-        <Paper 
-          elevation={3} 
-          style={{ 
-            padding: '20px', 
-            marginTop: '20px', 
-            width: '60%',
-            margin: '0 auto'
-          }}
-        >
-          <Grid justifyContent='center' alignItems='center' container direction='column' spacing={2}>
+
+      {/* Update Form */}
+      <Paper 
+        elevation={3} 
+        style={{ 
+          padding: '20px', 
+          marginTop: '20px', 
+          maxWidth:'400px',
+          width: '100%',
+          margin: '0 auto'
+        }}
+      >
+        <form onSubmit={handleUpdateUser}>
+          <Grid 
+            container 
+            direction='column' 
+            spacing={2}
+            justifyContent='center'
+            alignItems='center'
+            sx={{color: (theme) => theme.palette.text.secondary}}
+          >
             <h2>Update Account</h2>
             <Grid item>
               <TextField
-              type='text'
-              name='firstName'
-              value={updateFormData.firstName}
-              onChange={handleUpdateChange}
-              placeholder='First Name'
-              variant='standard'
-              label='First Name'
+                type='text'
+                name='firstName'
+                value={updateFormData.firstName}
+                onChange={handleUpdateChange}
+                placeholder='First Name'
+                variant='standard'
+                label='First Name'
               />
             </Grid>
             <Grid item>
               <TextField
-              type='text'
-              name='lastName'
-              value={updateFormData.lastName}
-              onChange={handleUpdateChange}
-              placeholder='Last Name'
-              variant='standard'
-              label='Last Name'
+                type='text'
+                name='lastName'
+                value={updateFormData.lastName}
+                onChange={handleUpdateChange}
+                placeholder='Last Name'
+                variant='standard'
+                label='Last Name'
               />
             </Grid>
             <Grid item>
               <TextField
-              type='text'
-              name='email'
-              value={updateFormData.email}
-              onChange={handleUpdateChange}
-              placeholder='Email'
-              variant='standard'
-              label='Email'
+                type='text'
+                name='email'
+                value={updateFormData.email}
+                onChange={handleUpdateChange}
+                placeholder='Email'
+                variant='standard'
+                label='Email'
               />
             </Grid>
             <Grid item>
               <TextField
-              type='password'
-              name='password'
-              value={updateFormData.password}
-              onChange={handleUpdateChange}
-              placeholder='Password'
-              variant='standard'
-              label='Password'
+                type='password'
+                name='password'
+                value={updateFormData.password}
+                onChange={handleUpdateChange}
+                placeholder='Password'
+                variant='standard'
+                label='Password'
               />
             </Grid>
             <Grid item>
-              <Button variant='contained' type='submit'>Update Account</Button>
+              <Button 
+                variant='contained' 
+                type='submit'
+                sx={{backgroundImage: (theme) => theme.palette.gradients.main}}
+              >
+                Update Account
+              </Button>
             </Grid>
+          </Grid>
+        </form>
+      </Paper>
+
+      {/* Delete Form */}
+      <Paper 
+        elevation={3} 
+        style={{ 
+          padding: '20px', 
+          marginTop: '20px',
+          maxWidth:'400px',
+          width: '100%',
+          margin: '20px auto'
+        }}
+      >
+        <form onSubmit={handleOpen}>
+          <Grid 
+            container 
+            direction='column' 
+            spacing={2}
+            justifyContent='center'
+            alignItems='center'
+            sx={{color: (theme)=> theme.palette.text.secondary}}
+          >
             <h2>Delete Account</h2>
             <Grid item>
               <TextField
-              type='text'
-              name='email'
-              value={deleteFormData.email}
-              onChange={handleDeleteChange}
-              placeholder='Email'
-              variant='standard'
-              label='Email'
+                type='text'
+                name='email'
+                value={deleteFormData.email}
+                onChange={handleDeleteChange}
+                placeholder='Email'
+                variant='standard'
+                label='Email'
               />
             </Grid>
             <Grid item>
               <TextField
-              type='password'
-              name='password'
-              value={deleteFormData.password}
-              onChange={handleDeleteChange}
-              placeholder='Password'
-              variant='standard'
-              label='Password'
+                type='password'
+                name='password'
+                value={deleteFormData.password}
+                onChange={handleDeleteChange}
+                placeholder='Password'
+                variant='standard'
+                label='Password'
               />
             </Grid>
             <Grid item>
-              <Button onSubmit={handleDeleteUser}variant='contained' type='submit'>Delete Account</Button>
-            </Grid>
-            <Grid item>
-              <Button variant='contained' onClick={handleLogout}>
-                Logout
-              </Button> 
+              <Button 
+                variant='contained' 
+                type='submit'
+                sx={{backgroundImage: (theme) => theme.palette.gradients.main}}
+              >
+                Delete Account
+              </Button>
             </Grid>
           </Grid>
-        </Paper>
-      </form>
-    </div>
+        </form>
+      </Paper>
+
+      <Grid item sx={{display:'flex',justifyContent:'center'}}>
+        <Button 
+          variant='contained' 
+          onClick={handleLogout}
+          sx={{backgroundImage: (theme) => theme.palette.gradients.main}}
+        >
+            Logout
+        </Button>
+      </Grid>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box
+          sx={{
+            position:'absolute',
+            top:'50%',
+            left:'50%',
+            transform:'translate(-50%, -50%)',
+            width:300,
+            bgcolor:'background.paper',
+            borderRadius:'10px',
+            boxShadow:24,
+            p: 4,
+            textAlign:'center',
+          }}
+        >
+          <Typography id="modal-title" variant='h6' component="h2" gutterBottom>
+            Are you sure you want to delete your account?
+          </Typography>
+
+          <Grid container justifyContent='space-between'>
+            <Button
+              variant='contained'
+              color='success'
+              onClick={async () => {
+                try {
+                  await handleDeleteUser();
+                  handleClose();
+                } catch (error) {
+                  console.error("Error during deletion:", error.message);
+                }
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              variant='contained'
+              onClick={handleClose}
+              color='error'
+            >
+              No
+            </Button>
+          </Grid>
+        </Box>
+      </Modal>
+    </main>
   )
 }
