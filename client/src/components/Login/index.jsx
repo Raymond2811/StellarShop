@@ -15,11 +15,18 @@ export default function Login(){
   const navigate = useNavigate();
   const [login] = useMutation(LOGIN);
   const [addToCartMutation] = useMutation(ADD_TO_CART);
-  const [clearCartMutatiion] = useMutation(CLEAR_CART);
+  const [clearCartMutation] = useMutation(CLEAR_CART);
   const [cartData] = useLazyQuery(QUERY_CART);
   const [formData, setFormData] = useState({
     email:'',
     password: '',
+  });
+
+  const [errorState, setErrorState] = useState({
+    emailError: false,
+    passwordError: false,
+    emailErrorMessage: '',
+    passwordErrorMessage: ''
   });
 
   const handleChange = (e) => {
@@ -42,7 +49,7 @@ export default function Login(){
     const { data: fetchCartData } = await cartData();
 
     if(fetchCartData && fetchCartData.cart && fetchCartData.cart.length > 0){
-      await clearCartMutatiion();
+      await clearCartMutation();
     }
     
     await Promise.all(cartItems.map((item) => {
@@ -63,8 +70,30 @@ export default function Login(){
 
     } catch (error) {
      console.error('Error logging in:', error.message);
+
+      if (error.message.includes('email')) {
+        setErrorState({
+          ...errorState,
+          emailError: true,
+          emailErrorMessage: 'Invalid email address',
+        });
+      } else if (error.message.includes('password')) {
+        setErrorState({
+          ...errorState,
+          passwordError: true,
+          passwordErrorMessage: 'Incorrect password',
+        });
+      } else {
+        setErrorState({
+          ...errorState,
+          emailError: true,
+          passwordError: true,
+          emailErrorMessage: 'Invalid email or password',
+          passwordErrorMessage: 'Invalid email or password',
+        });
+      }
     }
-  }
+  };
 
   return (
     <div className='login-container'>
@@ -80,6 +109,8 @@ export default function Login(){
             placeholder='me@email.com'
             variant='standard'
             label='Email'
+              error={errorState.emailError}
+              helperText={errorState.emailError ? errorState.emailErrorMessage : ''}
             />
           </Grid>
           <Grid item>
@@ -92,6 +123,8 @@ export default function Login(){
             required
             variant='standard'
             label='Password'
+              error={errorState.passwordError}
+              helperText={errorState.passwordError ? errorState.passwordErrorMessage : ''}
             />
           </Grid>
           <Grid item>
