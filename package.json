@@ -7,7 +7,7 @@
     "start": " npm run build && node server/server.js && cd client",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\" ",
     "install": "cd server && npm i && cd ../client && npm i",
-    "build": "cd client && node --max-old-space-size=4096 node_modules/.bin/vite build",
+    "build": "cd client && node --max-old-space-size=12288 node_modules/.bin/vite build",
     "render-build": "npm run install && npm run build"
   },
   "keywords": [],
