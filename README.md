@@ -1,4 +1,6 @@
-# StellarShop
+# StellarShop[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+![StellarShop-homepage](/client/public/assets/images/StellarShop.png)
 
   ## Table of Contents
   * [Technologies-Used](#technologies-used)
