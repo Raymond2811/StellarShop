@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import { useEffect, useState } from 'react';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -26,6 +27,7 @@ export default function Cart(){
   const [clearCartMutation] = useMutation(CLEAR_CART);
   const [checkout] = useMutation(CHECKOUT);
 
+  const [cartHeight, setCartHeight] = useState('100%')
   const handleClearCart = async () => {
     if(!Auth.loggedIn()){
       dispatch(clearCart());
@@ -68,6 +70,14 @@ export default function Cart(){
     dispatch(toggleCart());
   }
 
+  useEffect(() => {
+    if (cartItems.length > 4) {
+      setCartHeight('auto');
+    } else {
+      setCartHeight('100%');
+    }
+  },[cartItems]);
+
   return(
   <section>
     <IconButton color="inherit" onClick={handleToggleCart}>
@@ -82,8 +92,8 @@ export default function Cart(){
       <Box sx={{ 
         width: 350, 
         padding: 2, 
-        backgroundImage: (theme) => theme.palette.gradients.main, 
-        height:'auto',
+        backgroundImage: (theme) => theme.palette.gradients.main,
+        height: cartHeight,
         }}
       >
         <Box sx={{
@@ -106,7 +116,11 @@ export default function Cart(){
         </Box>
 
         {cartItems.length ? (
-          <Box>
+          <Box
+          sx={{
+            flexGrow: 1, // Makes the product list take up available space
+          }}
+        >
             {cartItems.map((product) => (
               <CartItem key={product._id} product={product} />
             ))}
