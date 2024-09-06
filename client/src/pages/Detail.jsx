@@ -139,7 +139,7 @@ export default function Detail() {
               justifyContent:'start',
               }}
             >
-            <Typography variant="h5" align="center" paragraph>
+            <Typography variant="h5" paragraph>
               {product.description}
             </Typography>
             <Typography align="center" variant="h6">
