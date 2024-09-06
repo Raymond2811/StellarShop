@@ -16,7 +16,7 @@ const cellPhones = [
     category: 'Cell Phones',
   },
   {
-    name: 'Apple - iPhone 13 5G 128GB (Unlocked) - Midnight',
+    name: 'Apple - iPhone 13 5G 128GB - Midnight',
     description:'The most advanced dual-camera system ever on iPhone. Lightning-fast A15 Bionic chip. A big leap in battery life. Durable design. Superfast 5G.¹ And a brighter Super Retina XDR display.',
     image: '/assets/images/iphone13.jpg',
     price: 598.94,
@@ -24,7 +24,7 @@ const cellPhones = [
     category: 'Cell Phones',
   },
   {
-    name: 'Apple - iPhone SE (3rd Generation) 64GB (Unlocked) - Black',
+    name: 'Apple - iPhone SE (3rd Gen) 64GB - Black',
     description:'Lightning-fast A15 Bionic chip and fast 5G.1 Big-time battery life and a superstar camera. Plus, the toughest glass in a smartphone and a Home button with secure Touch ID.',
     image: '/assets/images/iphoneSE.jpg',
     price: 399.99,
