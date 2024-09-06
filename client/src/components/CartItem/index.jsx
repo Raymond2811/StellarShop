@@ -73,7 +73,7 @@ export default function CartItem({product}) {
         display: 'flex',
         alignItems:'center',
         borderBottom: '1px solid white',
-        marginBottom:1
+        marginBottom:'20px'
       }}
       >
         <IconButton 
@@ -89,8 +89,7 @@ export default function CartItem({product}) {
         <img
           src={product.image}
           alt={product.name}
-          style={{ 
-            // width: 'auto', 
+          style={{  
             maxWidth:'100px',
             height: '100px', 
             objectFit:'contain', 
