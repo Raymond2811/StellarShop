@@ -27,7 +27,7 @@ export default function Cart(){
   const [clearCartMutation] = useMutation(CLEAR_CART);
   const [checkout] = useMutation(CHECKOUT);
 
-  const [cartHeight, setCartHeight] = useState('100%')
+  const [cartHeight, setCartHeight] = useState('120%')
   const handleClearCart = async () => {
     if(!Auth.loggedIn()){
       dispatch(clearCart());
@@ -74,7 +74,7 @@ export default function Cart(){
     if (cartItems.length > 4) {
       setCartHeight('auto');
     } else {
-      setCartHeight('100%');
+      setCartHeight('120%');
     }
   },[cartItems]);
 

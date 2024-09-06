@@ -72,7 +72,8 @@ export default function CartItem({product}) {
       <Box sx={{
         display: 'flex',
         alignItems:'center',
-        borderBottom: '1px solid white'
+        borderBottom: '1px solid white',
+        marginBottom:1
       }}
       >
         <IconButton 
@@ -89,9 +90,10 @@ export default function CartItem({product}) {
           src={product.image}
           alt={product.name}
           style={{ 
-            width: '100%', 
-            height: 120, 
-            objectFit:'cover', 
+            // width: 'auto', 
+            maxWidth:'100px',
+            height: '100px', 
+            objectFit:'contain', 
             padding:'10px',
             borderRadius:'15px'
           }}
