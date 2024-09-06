@@ -71,11 +71,25 @@ export default function Cart(){
   }
 
   useEffect(() => {
-    if (cartItems.length > 4) {
-      setCartHeight('auto');
-    } else {
-      setCartHeight('120%');
-    }
+    const updateCartHeight = () => {
+      const screenHeight = window.innerHeight;
+      let itemThreshold = 4
+
+      if(screenHeight > 800) {
+        itemThreshold = 5;
+      }
+
+      if (cartItems.length > itemThreshold) {
+        setCartHeight('auto');
+      } else {
+        setCartHeight('120%');
+      }
+    };
+
+    updateCartHeight();
+
+    window.addEventListener('resize',updateCartHeight);
+    return () => window.removeEventListener('resize',updateCartHeight);
   },[cartItems]);
 
   return(
@@ -103,7 +117,7 @@ export default function Cart(){
           marginBottom: 2,
         }}
         >
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" sx={{marginBottom:'15px'}}>
             Your Shopping Cart
             <IconButton 
               color="inherit" 
