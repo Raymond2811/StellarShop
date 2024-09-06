@@ -29,6 +29,13 @@ main{
   }
 }
 
+@media(max-width:600px){
+  .createUserInput{
+    display: flex;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 550px){
   header .header-container{
     padding: 8px;

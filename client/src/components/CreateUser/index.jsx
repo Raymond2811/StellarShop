@@ -62,7 +62,7 @@ export default function CreateUser() {
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
         <Grid container direction="column">
-          <Grid item>
+          <Grid item sx={{marginBottom:'20px'}} className="createUserInput">
             <TextField
             type="text"
             name="firstName"
@@ -74,7 +74,7 @@ export default function CreateUser() {
             label='First Name'
             />
           </Grid>
-          <Grid item>
+          <Grid item sx={{marginBottom:'20px'}} className="createUserInput">
             <TextField
             type="text"
             name="lastName"
@@ -86,7 +86,7 @@ export default function CreateUser() {
             label='Last Name'
             />
           </Grid>
-          <Grid item>
+          <Grid item sx={{marginBottom:'20px'}} className="createUserInput">
             <TextField
             type="email"
             name="email"
@@ -98,7 +98,7 @@ export default function CreateUser() {
             label='Email'
             />
           </Grid>
-          <Grid item>
+          <Grid item sx={{marginBottom:'20px'}} className="createUserInput">
             <TextField
             type="password"
             name="password"
@@ -110,8 +110,14 @@ export default function CreateUser() {
             label='Password'
             />
           </Grid>
-          <Grid item>
-            <Button variant='contained' type="submit">Create Account</Button>
+          <Grid item sx={{marginBottom:'20px'}} className="createUserInput">
+            <Button 
+              variant='contained' 
+              type="submit"
+              sx={{backgroundImage:(theme) => theme.palette.gradients.main}}
+            >
+              Create Account
+            </Button>
           </Grid>
         </Grid>
       </form>
